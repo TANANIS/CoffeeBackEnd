@@ -17,6 +17,7 @@
           <Property Name="UnitPrice" Type="smallint" />
           <Property Name="TotalPrice" Type="int" />
           <Property Name="CreateDate" Type="datetime" />
+          <Property Name="Status" Type="varchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="CARTHEATER">
           <Key>
@@ -47,6 +48,7 @@
           <Property Name="UpdateUser" Type="varchar" MaxLength="12" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="Status" Type="varchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="ORDERDETAIL">
           <Key>
@@ -76,12 +78,12 @@
           <Property Name="OrderDate" Type="datetime" />
           <Property Name="Payment" Type="char" MaxLength="6" />
           <Property Name="Total" Type="int" />
-          <Property Name="OrderStatus" Type="varchar" MaxLength="1" />
           <Property Name="ShipStatus" Type="varchar" MaxLength="1" />
           <Property Name="CreateUser" Type="varchar" MaxLength="12" />
           <Property Name="UpdateUser" Type="varchar" MaxLength="12" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="Status" Type="varchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="PAYMENT">
           <Key>
@@ -101,6 +103,7 @@
           <Property Name="UpdateUser" Type="varchar" MaxLength="12" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="Status" Type="varchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="PRODUCT">
           <Key>
@@ -120,6 +123,116 @@
           <Property Name="UpdateUser" Type="nvarchar" MaxLength="12" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="Timelimit" Type="datetime" />
+          <Property Name="Fragrance" Type="tinyint" />
+          <Property Name="Sour" Type="tinyint" />
+          <Property Name="Bitter" Type="tinyint" />
+          <Property Name="Sweet" Type="tinyint" />
+          <Property Name="STRONG" Type="tinyint" />
+          <Property Name="Method" Type="varchar" MaxLength="100" />
+          <Property Name="ImgA" Type="varchar" MaxLength="100" />
+          <Property Name="ImgB" Type="varchar" MaxLength="100" />
+          <Property Name="ImgC" Type="varchar" MaxLength="100" />
+          <Property Name="ImgD" Type="varchar" MaxLength="100" />
+          <Property Name="Weight" Type="smallint" />
+          <Property Name="Status" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="STOCKHEADER">
+          <Key>
+            <PropertyRef Name="StockID" />
+          </Key>
+          <Property Name="StockID" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="varchar" MaxLength="12" />
+          <Property Name="Uom" Type="varchar" MaxLength="10" />
+          <Property Name="Qty" Type="smallint" />
+          <Property Name="CreateUser" Type="varchar" MaxLength="12" />
+          <Property Name="UpdateUser" Type="varchar" MaxLength="12" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="Status" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'PROJECT.dbo.v_cart_product' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="v_cart_product">
+          <Key>
+            <PropertyRef Name="CartId" />
+            <PropertyRef Name="CartItemId" />
+          </Key>
+          <Property Name="CartId" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="CartItemId" Type="smallint" Nullable="false" />
+          <Property Name="ProductId" Type="varchar" MaxLength="100" />
+          <Property Name="QTY" Type="smallint" />
+          <Property Name="UnitPrice" Type="smallint" />
+          <Property Name="TotalPrice" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserId" Type="varchar" MaxLength="12" />
+          <Property Name="Status" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'PROJECT.dbo.v_cartALL' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="v_cartALL">
+          <Key>
+            <PropertyRef Name="CartId" />
+            <PropertyRef Name="CartItemId" />
+          </Key>
+          <Property Name="CartId" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="CartItemId" Type="smallint" Nullable="false" />
+          <Property Name="ProductId" Type="varchar" MaxLength="100" />
+          <Property Name="QTY" Type="smallint" />
+          <Property Name="UnitPrice" Type="smallint" />
+          <Property Name="TotalPrice" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="UserId" Type="varchar" MaxLength="12" />
+          <Property Name="Status" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'PROJECT.dbo.v_orderheader_orderdetail' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="v_orderheader_orderdetail">
+          <Key>
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="OrderItem" />
+          </Key>
+          <Property Name="OrderId" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="OrderItem" Type="smallint" Nullable="false" />
+          <Property Name="CustomerID" Type="varchar" MaxLength="12" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="Payment" Type="char" MaxLength="6" />
+          <Property Name="ShipStatus" Type="varchar" MaxLength="1" />
+          <Property Name="ProductId" Type="varchar" MaxLength="12" />
+          <Property Name="Qty" Type="smallint" />
+          <Property Name="Uom" Type="nvarchar" MaxLength="6" />
+          <Property Name="UnitPrice" Type="smallint" />
+          <Property Name="Totle" Type="int" />
+          <Property Name="Status" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'PROJECT.dbo.v_product_stock' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="v_product_stock">
+          <Key>
+            <PropertyRef Name="StockID" />
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="StockID" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="ProductID" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Qty" Type="smallint" />
+          <Property Name="Uom" Type="varchar" MaxLength="10" />
+          <Property Name="Price" Type="smallint" />
+          <Property Name="Category" Type="varchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="Country" Type="varchar" MaxLength="100" />
+          <Property Name="Baking" Type="varchar" MaxLength="100" />
+          <Property Name="Flavor" Type="varchar" MaxLength="100" />
           <Property Name="Dripbag" Type="bit" />
           <Property Name="Timelimit" Type="datetime" />
           <Property Name="Fragrance" Type="tinyint" />
@@ -134,14 +247,6 @@
           <Property Name="ImgD" Type="varchar" MaxLength="100" />
           <Property Name="Weight" Type="smallint" />
         </EntityType>
-        <EntityType Name="Users">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
-        </EntityType>
         <EntityContainer Name="ProductionModelStoreContainer">
           <EntitySet Name="CARTDETAIL" EntityType="Self.CARTDETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CARTHEATER" EntityType="Self.CARTHEATER" Schema="dbo" store:Type="Tables" />
@@ -150,7 +255,79 @@
           <EntitySet Name="ORDERHEADER" EntityType="Self.ORDERHEADER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PAYMENT" EntityType="Self.PAYMENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STOCKHEADER" EntityType="Self.STOCKHEADER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="v_cart_product" EntityType="Self.v_cart_product" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_cart_product].[CartId] AS [CartId], 
+    [v_cart_product].[CartItemId] AS [CartItemId], 
+    [v_cart_product].[ProductId] AS [ProductId], 
+    [v_cart_product].[QTY] AS [QTY], 
+    [v_cart_product].[UnitPrice] AS [UnitPrice], 
+    [v_cart_product].[TotalPrice] AS [TotalPrice], 
+    [v_cart_product].[CreateDate] AS [CreateDate], 
+    [v_cart_product].[ProductName] AS [ProductName], 
+    [v_cart_product].[UserId] AS [UserId], 
+    [v_cart_product].[Status] AS [Status]
+    FROM [dbo].[v_cart_product] AS [v_cart_product]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_cartALL" EntityType="Self.v_cartALL" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_cartALL].[CartId] AS [CartId], 
+    [v_cartALL].[CartItemId] AS [CartItemId], 
+    [v_cartALL].[ProductId] AS [ProductId], 
+    [v_cartALL].[QTY] AS [QTY], 
+    [v_cartALL].[UnitPrice] AS [UnitPrice], 
+    [v_cartALL].[TotalPrice] AS [TotalPrice], 
+    [v_cartALL].[CreateDate] AS [CreateDate], 
+    [v_cartALL].[UserId] AS [UserId], 
+    [v_cartALL].[Status] AS [Status]
+    FROM [dbo].[v_cartALL] AS [v_cartALL]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_orderheader_orderdetail" EntityType="Self.v_orderheader_orderdetail" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_orderheader_orderdetail].[OrderId] AS [OrderId], 
+    [v_orderheader_orderdetail].[OrderItem] AS [OrderItem], 
+    [v_orderheader_orderdetail].[CustomerID] AS [CustomerID], 
+    [v_orderheader_orderdetail].[OrderDate] AS [OrderDate], 
+    [v_orderheader_orderdetail].[Payment] AS [Payment], 
+    [v_orderheader_orderdetail].[ShipStatus] AS [ShipStatus], 
+    [v_orderheader_orderdetail].[ProductId] AS [ProductId], 
+    [v_orderheader_orderdetail].[Qty] AS [Qty], 
+    [v_orderheader_orderdetail].[Uom] AS [Uom], 
+    [v_orderheader_orderdetail].[UnitPrice] AS [UnitPrice], 
+    [v_orderheader_orderdetail].[Totle] AS [Totle], 
+    [v_orderheader_orderdetail].[Status] AS [Status]
+    FROM [dbo].[v_orderheader_orderdetail] AS [v_orderheader_orderdetail]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_product_stock" EntityType="Self.v_product_stock" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_product_stock].[StockID] AS [StockID], 
+    [v_product_stock].[ProductID] AS [ProductID], 
+    [v_product_stock].[ProductName] AS [ProductName], 
+    [v_product_stock].[Qty] AS [Qty], 
+    [v_product_stock].[Uom] AS [Uom], 
+    [v_product_stock].[Price] AS [Price], 
+    [v_product_stock].[Category] AS [Category], 
+    [v_product_stock].[Description] AS [Description], 
+    [v_product_stock].[Country] AS [Country], 
+    [v_product_stock].[Baking] AS [Baking], 
+    [v_product_stock].[Flavor] AS [Flavor], 
+    [v_product_stock].[Dripbag] AS [Dripbag], 
+    [v_product_stock].[Timelimit] AS [Timelimit], 
+    [v_product_stock].[Fragrance] AS [Fragrance], 
+    [v_product_stock].[Sour] AS [Sour], 
+    [v_product_stock].[Bitter] AS [Bitter], 
+    [v_product_stock].[Sweet] AS [Sweet], 
+    [v_product_stock].[STRONG] AS [STRONG], 
+    [v_product_stock].[Method] AS [Method], 
+    [v_product_stock].[ImgA] AS [ImgA], 
+    [v_product_stock].[ImgB] AS [ImgB], 
+    [v_product_stock].[ImgC] AS [ImgC], 
+    [v_product_stock].[ImgD] AS [ImgD], 
+    [v_product_stock].[Weight] AS [Weight]
+    FROM [dbo].[v_product_stock] AS [v_product_stock]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -166,31 +343,19 @@
         </EntityType>
         <EntityContainer Name="ProductionEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="ORDERHEADERs" EntityType="ProductionModel.ORDERHEADER" />
           <EntitySet Name="PAYMENTs" EntityType="ProductionModel.PAYMENT" />
-          <EntitySet Name="PRODUCTs" EntityType="ProductionModel.PRODUCT" />
           <EntitySet Name="CARTDETAILs" EntityType="ProductionModel.CARTDETAIL" />
           <EntitySet Name="CARTHEATERs" EntityType="ProductionModel.CARTHEATER" />
           <EntitySet Name="ORDERDETAILs" EntityType="ProductionModel.ORDERDETAIL" />
           <EntitySet Name="CUSTOMERs" EntityType="ProductionModel.CUSTOMER" />
+          <EntitySet Name="STOCKHEADERs" EntityType="ProductionModel.STOCKHEADER" />
+          <EntitySet Name="v_cart_product" EntityType="ProductionModel.v_cart_product" />
+          <EntitySet Name="v_cartALL" EntityType="ProductionModel.v_cartALL" />
+          <EntitySet Name="v_orderheader_orderdetail" EntityType="ProductionModel.v_orderheader_orderdetail" />
+          <EntitySet Name="v_product_stock" EntityType="ProductionModel.v_product_stock" />
+          <EntitySet Name="ORDERHEADERs" EntityType="ProductionModel.ORDERHEADER" />
+          <EntitySet Name="PRODUCTs" EntityType="ProductionModel.PRODUCT" />
         </EntityContainer>
-        <EntityType Name="ORDERHEADER">
-          <Key>
-            <PropertyRef Name="OrderId" />
-          </Key>
-          <Property Name="OrderId" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CustomerID" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="OrderDate" Type="DateTime" Precision="3" />
-          <Property Name="Payment" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
-          <Property Name="Total" Type="Int32" />
-          <Property Name="OrderStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="ShipStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="CreateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="UpdateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="PAYMENT">
           <Key>
             <PropertyRef Name="PayID" />
@@ -209,38 +374,7 @@
           <Property Name="UpdateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="PRODUCT">
-          <Key>
-            <PropertyRef Name="ProductID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Int16" />
-          <Property Name="Category" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Uom" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Baking" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Flavor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CreateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-          <Property Name="UpdateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-          <Property Name="Dripbag" Type="Boolean" />
-          <Property Name="Timelimit" Type="DateTime" Precision="3" />
-          <Property Name="Fragrance" Type="Byte" />
-          <Property Name="Sour" Type="Byte" />
-          <Property Name="Bitter" Type="Byte" />
-          <Property Name="Sweet" Type="Byte" />
-          <Property Name="STRONG" Type="Byte" />
-          <Property Name="Method" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ImgA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ImgB" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ImgC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ImgD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Weight" Type="Int16" />
+          <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="CARTDETAIL">
           <Key>
@@ -254,6 +388,7 @@
           <Property Name="UnitPrice" Type="Int16" />
           <Property Name="TotalPrice" Type="Int32" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="CARTHEATER">
           <Key>
@@ -302,6 +437,150 @@
           <Property Name="UpdateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="STOCKHEADER">
+          <Key>
+            <PropertyRef Name="StockID" />
+          </Key>
+          <Property Name="StockID" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Uom" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Qty" Type="Int16" />
+          <Property Name="CreateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="v_cart_product">
+          <Key>
+            <PropertyRef Name="CartId" />
+            <PropertyRef Name="CartItemId" />
+          </Key>
+          <Property Name="CartId" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="CartItemId" Type="Int16" Nullable="false" />
+          <Property Name="ProductId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="QTY" Type="Int16" />
+          <Property Name="UnitPrice" Type="Int16" />
+          <Property Name="TotalPrice" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="v_cartALL">
+          <Key>
+            <PropertyRef Name="CartId" />
+            <PropertyRef Name="CartItemId" />
+          </Key>
+          <Property Name="CartId" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="CartItemId" Type="Int16" Nullable="false" />
+          <Property Name="ProductId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="QTY" Type="Int16" />
+          <Property Name="UnitPrice" Type="Int16" />
+          <Property Name="TotalPrice" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="v_orderheader_orderdetail">
+          <Key>
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="OrderItem" />
+          </Key>
+          <Property Name="OrderId" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="OrderItem" Type="Int16" Nullable="false" />
+          <Property Name="CustomerID" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="Payment" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="ShipStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="ProductId" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Qty" Type="Int16" />
+          <Property Name="Uom" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="UnitPrice" Type="Int16" />
+          <Property Name="Totle" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="v_product_stock">
+          <Key>
+            <PropertyRef Name="StockID" />
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="StockID" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="ProductID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Qty" Type="Int16" />
+          <Property Name="Uom" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Int16" />
+          <Property Name="Category" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Baking" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Flavor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Dripbag" Type="Boolean" />
+          <Property Name="Timelimit" Type="DateTime" Precision="3" />
+          <Property Name="Fragrance" Type="Byte" />
+          <Property Name="Sour" Type="Byte" />
+          <Property Name="Bitter" Type="Byte" />
+          <Property Name="Sweet" Type="Byte" />
+          <Property Name="STRONG" Type="Byte" />
+          <Property Name="Method" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ImgA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ImgB" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ImgC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ImgD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Weight" Type="Int16" />
+        </EntityType>
+        <EntityType Name="ORDERHEADER">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="Payment" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="Total" Type="Int32" />
+          <Property Name="ShipStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CreateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PRODUCT">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Int16" />
+          <Property Name="Category" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Uom" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Baking" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Flavor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="Timelimit" Type="DateTime" Precision="3" />
+          <Property Name="Fragrance" Type="Byte" />
+          <Property Name="Sour" Type="Byte" />
+          <Property Name="Bitter" Type="Byte" />
+          <Property Name="Sweet" Type="Byte" />
+          <Property Name="STRONG" Type="Byte" />
+          <Property Name="Method" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ImgA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ImgB" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ImgC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ImgD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Weight" Type="Int16" />
+          <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -318,27 +597,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ORDERHEADERs">
-            <EntityTypeMapping TypeName="ProductionModel.ORDERHEADER">
-              <MappingFragment StoreEntitySet="ORDERHEADER">
-                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
-                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
-                <ScalarProperty Name="ShipStatus" ColumnName="ShipStatus" />
-                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Payment" ColumnName="Payment" />
-                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PAYMENTs">
             <EntityTypeMapping TypeName="ProductionModel.PAYMENT">
               <MappingFragment StoreEntitySet="PAYMENT">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
@@ -356,42 +618,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PRODUCTs">
-            <EntityTypeMapping TypeName="ProductionModel.PRODUCT">
-              <MappingFragment StoreEntitySet="PRODUCT">
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="ImgD" ColumnName="ImgD" />
-                <ScalarProperty Name="ImgC" ColumnName="ImgC" />
-                <ScalarProperty Name="ImgB" ColumnName="ImgB" />
-                <ScalarProperty Name="ImgA" ColumnName="ImgA" />
-                <ScalarProperty Name="Method" ColumnName="Method" />
-                <ScalarProperty Name="STRONG" ColumnName="STRONG" />
-                <ScalarProperty Name="Sweet" ColumnName="Sweet" />
-                <ScalarProperty Name="Bitter" ColumnName="Bitter" />
-                <ScalarProperty Name="Sour" ColumnName="Sour" />
-                <ScalarProperty Name="Fragrance" ColumnName="Fragrance" />
-                <ScalarProperty Name="Timelimit" ColumnName="Timelimit" />
-                <ScalarProperty Name="Dripbag" ColumnName="Dripbag" />
-                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
-                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
-                <ScalarProperty Name="Flavor" ColumnName="Flavor" />
-                <ScalarProperty Name="Baking" ColumnName="Baking" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Uom" ColumnName="Uom" />
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CARTDETAILs">
             <EntityTypeMapping TypeName="ProductionModel.CARTDETAIL">
               <MappingFragment StoreEntitySet="CARTDETAIL">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
                 <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
@@ -433,6 +663,7 @@
           <EntitySetMapping Name="CUSTOMERs">
             <EntityTypeMapping TypeName="ProductionModel.CUSTOMER">
               <MappingFragment StoreEntitySet="CUSTOMER">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
@@ -449,6 +680,152 @@
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STOCKHEADERs">
+            <EntityTypeMapping TypeName="ProductionModel.STOCKHEADER">
+              <MappingFragment StoreEntitySet="STOCKHEADER">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Uom" ColumnName="Uom" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StockID" ColumnName="StockID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_cart_product">
+            <EntityTypeMapping TypeName="ProductionModel.v_cart_product">
+              <MappingFragment StoreEntitySet="v_cart_product">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="CartItemId" ColumnName="CartItemId" />
+                <ScalarProperty Name="CartId" ColumnName="CartId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_cartALL">
+            <EntityTypeMapping TypeName="ProductionModel.v_cartALL">
+              <MappingFragment StoreEntitySet="v_cartALL">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="CartItemId" ColumnName="CartItemId" />
+                <ScalarProperty Name="CartId" ColumnName="CartId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_orderheader_orderdetail">
+            <EntityTypeMapping TypeName="ProductionModel.v_orderheader_orderdetail">
+              <MappingFragment StoreEntitySet="v_orderheader_orderdetail">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Totle" ColumnName="Totle" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Uom" ColumnName="Uom" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ShipStatus" ColumnName="ShipStatus" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="OrderItem" ColumnName="OrderItem" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_product_stock">
+            <EntityTypeMapping TypeName="ProductionModel.v_product_stock">
+              <MappingFragment StoreEntitySet="v_product_stock">
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="ImgD" ColumnName="ImgD" />
+                <ScalarProperty Name="ImgC" ColumnName="ImgC" />
+                <ScalarProperty Name="ImgB" ColumnName="ImgB" />
+                <ScalarProperty Name="ImgA" ColumnName="ImgA" />
+                <ScalarProperty Name="Method" ColumnName="Method" />
+                <ScalarProperty Name="STRONG" ColumnName="STRONG" />
+                <ScalarProperty Name="Sweet" ColumnName="Sweet" />
+                <ScalarProperty Name="Bitter" ColumnName="Bitter" />
+                <ScalarProperty Name="Sour" ColumnName="Sour" />
+                <ScalarProperty Name="Fragrance" ColumnName="Fragrance" />
+                <ScalarProperty Name="Timelimit" ColumnName="Timelimit" />
+                <ScalarProperty Name="Dripbag" ColumnName="Dripbag" />
+                <ScalarProperty Name="Flavor" ColumnName="Flavor" />
+                <ScalarProperty Name="Baking" ColumnName="Baking" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Uom" ColumnName="Uom" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="StockID" ColumnName="StockID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDERHEADERs">
+            <EntityTypeMapping TypeName="ProductionModel.ORDERHEADER">
+              <MappingFragment StoreEntitySet="ORDERHEADER">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="ShipStatus" ColumnName="ShipStatus" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTs">
+            <EntityTypeMapping TypeName="ProductionModel.PRODUCT">
+              <MappingFragment StoreEntitySet="PRODUCT">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="ImgD" ColumnName="ImgD" />
+                <ScalarProperty Name="ImgC" ColumnName="ImgC" />
+                <ScalarProperty Name="ImgB" ColumnName="ImgB" />
+                <ScalarProperty Name="ImgA" ColumnName="ImgA" />
+                <ScalarProperty Name="Method" ColumnName="Method" />
+                <ScalarProperty Name="STRONG" ColumnName="STRONG" />
+                <ScalarProperty Name="Sweet" ColumnName="Sweet" />
+                <ScalarProperty Name="Bitter" ColumnName="Bitter" />
+                <ScalarProperty Name="Sour" ColumnName="Sour" />
+                <ScalarProperty Name="Fragrance" ColumnName="Fragrance" />
+                <ScalarProperty Name="Timelimit" ColumnName="Timelimit" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="Flavor" ColumnName="Flavor" />
+                <ScalarProperty Name="Baking" ColumnName="Baking" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Uom" ColumnName="Uom" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

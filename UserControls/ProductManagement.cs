@@ -44,25 +44,30 @@ namespace CoffeeBackEnd20221026.UserControls
         // 初始化下拉選單
         private void InitializeDropdowns()
         {
-            CBFilterColumn.Items.AddRange(new string[] { "Category", "Country", "Price", "Flavor" });
+            // 更新下拉選單項目，包括所有分類
+            // 初始化下拉選單項目，顯示中文欄位名稱
+            CBFilterColumn.Items.AddRange(new string[] { "類別", "國家", "風味", "製作方法", "甜度", "濃郁度", "香氣", "酸度", "苦度" });
+
+            // 綁定事件
+            CBFilterColumn.SelectedIndexChanged += CBFilterColumn_SelectedIndexChanged;
             CBFilterValue.SelectedIndexChanged += CBFilterValue_SelectedIndexChanged;
 
-            // 向國家下拉選單中添加選項
+            BTNClearFilters.Click += BTNClearFilters_Click;
             CBCountry.Items.AddRange(new object[] { "衣索比亞", "巴西", "哥倫比亞", "瓜地馬拉", "肯亞" });
-            // 向類別下拉選單中添加選項
             CBcategory.Items.AddRange(new object[] { "咖啡豆", "濾掛咖啡" });
-            // 向圖片選擇下拉選單中添加選項
             CBImageSelect.Items.AddRange(new object[] { "ImgA", "ImgB", "ImgC", "ImgD" });
-            // 設定圖片選擇下拉選單的變更事件處理函式
             CBImageSelect.SelectedIndexChanged += CBImageSelect_SelectedIndexChanged;
 
-            // 向滴包下拉選單中添加選項
-            CBdripbag.DisplayMember = "Text";
-            CBdripbag.ValueMember = "Value";
-            CBdripbag.DataSource = new List<object> {
-        new { Text = "耳掛", Value = true },
-        new { Text = "非耳掛", Value = false }
-    };
+            // 評分範圍 1-5 分的選項，用於 Fragrance、Sour、Bitter、Sweet、STRONG
+            var scoreOptions = Enumerable.Range(1, 5).Select(x => x.ToString()).ToArray();
+            CBFragrance.Items.AddRange(scoreOptions);
+            CBSour.Items.AddRange(scoreOptions);
+            CBBitter.Items.AddRange(scoreOptions);
+            CBSweet.Items.AddRange(scoreOptions);
+            CBSTRONG.Items.AddRange(scoreOptions);
+
+            // Method選項
+            CBMethod.Items.AddRange(new string[] { "水洗", "日曬", "蜜處理" });
         }
 
         // 載入產品資料的私有方法都放這裡
@@ -70,14 +75,17 @@ namespace CoffeeBackEnd20221026.UserControls
         {
             try
             {
-                // 清空現有的資料來源
-                ProdDataGridView.DataSource = null; // 清空資料網格的資料來源
+                using (var context = new ProductionEntities())
+                {
+                    // 清空現有的資料來源
+                    ProdDataGridView.DataSource = null; // 清空資料網格的資料來源
 
-                // 從資料庫中獲取所有產品資料並轉換為列表
-                var products = context.PRODUCTs.ToList();
+                    // 從資料庫中獲取所有產品資料並轉換為列表
+                    var products = context.PRODUCTs.ToList();
 
-                // 將產品資料綁定到資料網格中
-                ProdDataGridView.DataSource = products;
+                    // 將產品資料綁定到資料網格中
+                    ProdDataGridView.DataSource = products;
+                }
             }
             catch (Exception ex)
             {
@@ -112,14 +120,12 @@ namespace CoffeeBackEnd20221026.UserControls
             TBname.Text = selectedRow.Cells["ProductName"].Value?.ToString() ?? string.Empty;
             TBprice.Text = selectedRow.Cells["Price"].Value?.ToString() ?? string.Empty;
             TBUOM.Text = selectedRow.Cells["Uom"].Value?.ToString() ?? string.Empty;
-            CBcategory.SelectedItem = selectedRow.Cells["Category"].Value;
+            CBcategory.SelectedItem = selectedRow.Cells["Category"].Value?.ToString() ?? string.Empty;
             CBCountry.SelectedItem = selectedRow.Cells["Country"].Value?.ToString() ?? string.Empty;
             TBFlavor.Text = selectedRow.Cells["Flavor"].Value?.ToString() ?? string.Empty;
+            TBdescription.Text = selectedRow.Cells["Description"].Value?.ToString() ?? string.Empty;
 
-            TBdescription.Text = selectedRow.Cells["Description"].Value?.ToString() ?? string.Empty; // 假設 "Description" 是對應的欄位名
-            CBdripbag.SelectedValue = selectedRow.Cells["Dripbag"].Value; // 假設 "Dripbag" 是對應的欄位名，並且是 bool 值
-
-
+            // 設置 Timelimit 日期
             if (DateTime.TryParse(selectedRow.Cells["Timelimit"].Value?.ToString(), out DateTime timelimit))
             {
                 DTPTimelimit.Value = timelimit;
@@ -128,6 +134,15 @@ namespace CoffeeBackEnd20221026.UserControls
             {
                 ShowErrorMessage("無法轉換時間限制的值。");
             }
+
+            // 設置 Method 和其他屬性分數 ComboBox
+            CBMethod.SelectedItem = selectedRow.Cells["Method"].Value?.ToString() ?? string.Empty;
+            CBFragrance.SelectedItem = selectedRow.Cells["Fragrance"].Value?.ToString() ?? string.Empty;
+            CBSour.SelectedItem = selectedRow.Cells["Sour"].Value?.ToString() ?? string.Empty;
+            CBBitter.SelectedItem = selectedRow.Cells["Bitter"].Value?.ToString() ?? string.Empty;
+            CBSweet.SelectedItem = selectedRow.Cells["Sweet"].Value?.ToString() ?? string.Empty;
+            CBSTRONG.SelectedItem = selectedRow.Cells["STRONG"].Value?.ToString() ?? string.Empty;
+
 
             ProdTabControl.SelectedTab = ProdDetailTabPage; //切換頁面
         }
@@ -209,16 +224,12 @@ namespace CoffeeBackEnd20221026.UserControls
             product.Category = CBcategory.SelectedItem?.ToString() ?? string.Empty;
             product.Country = CBCountry.SelectedItem?.ToString() ?? string.Empty;
             product.Flavor = TBFlavor.Text;
-
-            if (CBdripbag.SelectedItem != null)
-            {
-                product.Dripbag = ((dynamic)CBdripbag.SelectedItem).Value;
-            }
-            else
-            {
-                ShowErrorMessage("請選擇耳掛或非耳掛選項。");
-            }
-
+            product.Method = CBMethod.SelectedItem?.ToString() ?? string.Empty; // 新增方法
+            product.Fragrance = Convert.ToByte(CBFragrance.SelectedItem ?? 0); // 香氣
+            product.Sour = Convert.ToByte(CBSour.SelectedItem ?? 0); // 酸味
+            product.Bitter = Convert.ToByte(CBBitter.SelectedItem ?? 0); // 苦味
+            product.Sweet = Convert.ToByte(CBSweet.SelectedItem ?? 0); // 甜味
+            product.STRONG = Convert.ToByte(CBSTRONG.SelectedItem ?? 0); // 厚實
             product.UpdateUser = Username;
             product.UpdateDate = DateTime.Now;
         }
@@ -295,11 +306,24 @@ namespace CoffeeBackEnd20221026.UserControls
                 errorMessages.Add("請選擇一個國家。");
             if (string.IsNullOrWhiteSpace(product.Flavor))
                 errorMessages.Add("風味不得為空。");
+            if (string.IsNullOrWhiteSpace(product.Method))
+                errorMessages.Add("請選擇處理方法。");
+            if (product.Fragrance < 0 || product.Fragrance > 5)
+                errorMessages.Add("香氣值必須在 0 到 5 之間。");
+            if (product.Sour < 0 || product.Sour > 5)
+                errorMessages.Add("酸味值必須在 0 到 5 之間。");
+            if (product.Bitter < 0 || product.Bitter > 5)
+                errorMessages.Add("苦味值必須在 0 到 5 之間。");
+            if (product.Sweet < 0 || product.Sweet > 5)
+                errorMessages.Add("甜味值必須在 0 到 5 之間。");
+            if (product.STRONG < 0 || product.STRONG > 5)
+                errorMessages.Add("厚實值必須在 0 到 5 之間。");
             if (product.Timelimit < DateTime.Now)
                 errorMessages.Add("時間限制不能早於當前時間。");
 
             return string.Join("\n", errorMessages);
         }
+
 
 
         // 驗證輸入欄位的警告訊息
@@ -309,17 +333,6 @@ namespace CoffeeBackEnd20221026.UserControls
             if (!int.TryParse(TBprice.Text, out price) || price < short.MinValue || price > short.MaxValue)
             {
                 ShowErrorMessage("價格必須是有效的整數，並且在 -32,768 到 32,767 之間！");
-                return false;
-            }
-
-            if (CBdripbag.SelectedItem != null)
-            {
-                var selectedDripbag = (dynamic)CBdripbag.SelectedItem;
-                dripbagValue = selectedDripbag.Value;
-            }
-            else
-            {
-                ShowErrorMessage("請選擇耳掛或非耳掛選項。");
                 return false;
             }
 
@@ -337,10 +350,15 @@ namespace CoffeeBackEnd20221026.UserControls
                 Timelimit = DTPTimelimit.Value,
                 Uom = TBUOM.Text,
                 Description = TBdescription.Text,
-                Category = CBcategory.SelectedItem.ToString(),
-                Country = CBCountry.SelectedItem.ToString(),
-                Flavor = TBFlavor.Text.ToString(),
-                Dripbag = dripbagValue,
+                Category = CBcategory.SelectedItem?.ToString() ?? string.Empty,
+                Country = CBCountry.SelectedItem?.ToString() ?? string.Empty,
+                Flavor = TBFlavor.Text,
+                Method = CBMethod.SelectedItem?.ToString() ?? string.Empty,
+                Fragrance = Convert.ToByte(CBFragrance.SelectedItem ?? 0), // 明確轉型為 byte
+                Sour = Convert.ToByte(CBSour.SelectedItem ?? 0), // 明確轉型為 byte
+                Bitter = Convert.ToByte(CBBitter.SelectedItem ?? 0), // 明確轉型為 byte
+                Sweet = Convert.ToByte(CBSweet.SelectedItem ?? 0), // 明確轉型為 byte
+                STRONG = Convert.ToByte(CBSTRONG.SelectedItem ?? 0), // 明確轉型為 byte
                 CreateUser = Username,
                 CreateDate = DateTime.Now,
                 UpdateUser = Username,
@@ -402,18 +420,16 @@ namespace CoffeeBackEnd20221026.UserControls
             CBImageSelect.SelectedIndexChanged -= CBImageSelect_SelectedIndexChanged;
 
             // 清除文字框和 ComboBox 的值
-            TBproductID.Clear();
-
-            TBname.Clear();
-            TBprice.Clear();
-            TBdescription.Clear();
-            TBUOM.Clear();
-            TBFlavor.Clear();
-            CBcategory.SelectedIndex = -1;
-            CBCountry.SelectedIndex = -1;
-            CBdripbag.SelectedIndex = -1;
-            CBImageSelect.SelectedIndex = -1; // 清除 CBImageSelect 的選取項目
-            pictureBox.Image = null;
+            TBproductID.Clear();        // 清空產品 ID
+            TBname.Clear();             // 清空產品名稱
+            TBprice.Clear();            // 清空價格
+            TBdescription.Clear();      // 清空描述
+            TBUOM.Clear();              // 清空單位
+            TBFlavor.Clear();           // 清空風味
+            CBcategory.SelectedIndex = -1; // 清除分類的選取
+            CBCountry.SelectedIndex = -1;  // 清除國家的選取
+            CBImageSelect.SelectedIndex = -1; // 清除圖片選取的選項
+            pictureBox.Image = null;    // 清除圖片
 
             // 重新訂閱 CBImageSelect 的 SelectedIndexChanged 事件
             CBImageSelect.SelectedIndexChanged += CBImageSelect_SelectedIndexChanged;
@@ -594,27 +610,32 @@ namespace CoffeeBackEnd20221026.UserControls
             {
                 switch (selectedColumn)
                 {
-                    case "Category":
-                        CBFilterValue.DataSource = context.PRODUCTs
-                            .Select(p => p.Category).Distinct().ToList();
+                    case "類別":
+                        CBFilterValue.DataSource = context.PRODUCTs.Select(p => p.Category).Distinct().ToList();
                         break;
-                    case "Country":
-                        CBFilterValue.DataSource = context.PRODUCTs
-                            .Select(p => p.Country).Distinct().ToList();
+                    case "國家":
+                        CBFilterValue.DataSource = context.PRODUCTs.Select(p => p.Country).Distinct().ToList();
                         break;
-                    case "Price":
-                        CBFilterValue.DataSource = null; // 讓使用者自行輸入數字
-                        CBFilterValue.DropDownStyle = ComboBoxStyle.DropDown; // 讓價格欄位可以手動輸入
+                    case "風味":
+                        CBFilterValue.DataSource = context.PRODUCTs.Select(p => p.Flavor).Distinct().ToList();
                         break;
-                    case "Flavor":
-                        CBFilterValue.DataSource = context.PRODUCTs
-                            .Select(p => p.Flavor).Distinct().ToList();
-                        CBFilterValue.DropDownStyle = ComboBoxStyle.DropDownList; // 僅限選擇
+                    case "製作方法":
+                        CBFilterValue.DataSource = context.PRODUCTs.Select(p => p.Method).Distinct().ToList();
+                        break;
+                    case "甜度":
+                    case "濃郁度":
+                    case "香氣":
+                    case "酸度":
+                    case "苦度":
+                        CBFilterValue.DataSource = new List<string> { "0", "1", "2", "3", "4", "5" }; // 假設篩選值為 0 到 5
                         break;
                     default:
                         CBFilterValue.DataSource = null;
                         break;
                 }
+
+                // 更新下拉選單樣式
+                CBFilterValue.DropDownStyle = ComboBoxStyle.DropDownList; // 僅限選擇
             }
         }
 
@@ -637,25 +658,47 @@ namespace CoffeeBackEnd20221026.UserControls
                 // 根據選擇的欄位篩選資料
                 switch (selectedColumn)
                 {
-                    case "Category":
+                    case "類別":
                         query = query.Where(p => p.Category == selectedValue);
                         break;
-                    case "Country":
+                    case "國家":
                         query = query.Where(p => p.Country == selectedValue);
                         break;
-                    case "Price":
-                        if (decimal.TryParse(selectedValue, out var price))
+                    case "風味":
+                        query = query.Where(p => p.Flavor == selectedValue);
+                        break;
+                    case "製作方法":
+                        query = query.Where(p => p.Method == selectedValue);
+                        break;
+                    case "甜度":
+                        if (byte.TryParse(selectedValue, out var sweetValue))
                         {
-                            query = query.Where(p => p.Price == price);
-                        }
-                        else
-                        {
-                            ShowErrorMessage("請選擇或輸入有效的價格數字。");
-                            return;
+                            query = query.Where(p => p.Sweet == sweetValue);
                         }
                         break;
-                    case "Flavor":
-                        query = query.Where(p => p.Flavor == selectedValue);
+                    case "濃郁度":
+                        if (byte.TryParse(selectedValue, out var strongValue))
+                        {
+                            query = query.Where(p => p.STRONG == strongValue);
+                        }
+                        break;
+                    case "香氣":
+                        if (byte.TryParse(selectedValue, out var fragranceValue))
+                        {
+                            query = query.Where(p => p.Fragrance == fragranceValue);
+                        }
+                        break;
+                    case "酸度":
+                        if (byte.TryParse(selectedValue, out var sourValue))
+                        {
+                            query = query.Where(p => p.Sour == sourValue);
+                        }
+                        break;
+                    case "苦度":
+                        if (byte.TryParse(selectedValue, out var bitterValue))
+                        {
+                            query = query.Where(p => p.Bitter == bitterValue);
+                        }
                         break;
                     default:
                         break;
@@ -663,7 +706,21 @@ namespace CoffeeBackEnd20221026.UserControls
 
                 // 將篩選結果更新至 DataGridView
                 ProdDataGridView.DataSource = query.ToList();
+
             }
+        }
+
+        private void BTNClearFilters_Click(object sender, EventArgs e)
+        {
+            // 清空篩選下拉選單
+            CBFilterColumn.SelectedIndex = -1; // 重置主要篩選欄位
+            CBFilterValue.DataSource = null; // 清空篩選值
+
+            // 清除搜尋框的內容
+            TBselect.Clear();
+
+            // 重新載入所有產品資料
+            LoadProductData();
         }
     }
 }

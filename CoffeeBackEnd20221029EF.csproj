@@ -212,6 +212,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="STOCKHEADER.cs">
+      <DependentUpon>CoffeeBackEndModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="User.cs">
       <DependentUpon>CoffeeBackEndModel.tt</DependentUpon>
     </Compile>
@@ -238,6 +241,18 @@
     </Compile>
     <Compile Include="UserControls\ProductManagement.Designer.cs">
       <DependentUpon>ProductManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="v_cartALL.cs">
+      <DependentUpon>CoffeeBackEndModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="v_cart_product.cs">
+      <DependentUpon>CoffeeBackEndModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="v_orderheader_orderdetail.cs">
+      <DependentUpon>CoffeeBackEndModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="v_product_stock.cs">
+      <DependentUpon>CoffeeBackEndModel.tt</DependentUpon>
     </Compile>
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>

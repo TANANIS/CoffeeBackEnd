@@ -12,22 +12,20 @@ namespace CoffeeBackEnd20221026
     using System;
     using System.Collections.Generic;
     
-    public partial class PRODUCT
+    public partial class v_product_stock
     {
-        public int ID { get; set; }
+        public string StockID { get; set; }
         public string ProductID { get; set; }
         public string ProductName { get; set; }
+        public Nullable<short> Qty { get; set; }
+        public string Uom { get; set; }
         public Nullable<short> Price { get; set; }
         public string Category { get; set; }
-        public string Uom { get; set; }
         public string Description { get; set; }
         public string Country { get; set; }
         public string Baking { get; set; }
         public string Flavor { get; set; }
-        public string CreateUser { get; set; }
-        public string UpdateUser { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
-        public Nullable<System.DateTime> UpdateDate { get; set; }
+        public Nullable<bool> Dripbag { get; set; }
         public Nullable<System.DateTime> Timelimit { get; set; }
         public Nullable<byte> Fragrance { get; set; }
         public Nullable<byte> Sour { get; set; }
@@ -40,6 +38,5 @@ namespace CoffeeBackEnd20221026
         public string ImgC { get; set; }
         public string ImgD { get; set; }
         public Nullable<short> Weight { get; set; }
-        public string Status { get; set; }
     }
 }

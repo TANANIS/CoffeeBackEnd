@@ -10,31 +10,19 @@
   </EntityType>
   <EntityContainer Name="ProductionEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Users" EntityType="Self.User" />
-    <EntitySet Name="ORDERHEADERs" EntityType="ProductionModel.ORDERHEADER" />
     <EntitySet Name="PAYMENTs" EntityType="ProductionModel.PAYMENT" />
-    <EntitySet Name="PRODUCTs" EntityType="ProductionModel.PRODUCT" />
     <EntitySet Name="CARTDETAILs" EntityType="ProductionModel.CARTDETAIL" />
     <EntitySet Name="CARTHEATERs" EntityType="ProductionModel.CARTHEATER" />
     <EntitySet Name="ORDERDETAILs" EntityType="ProductionModel.ORDERDETAIL" />
     <EntitySet Name="CUSTOMERs" EntityType="ProductionModel.CUSTOMER" />
+    <EntitySet Name="STOCKHEADERs" EntityType="ProductionModel.STOCKHEADER" />
+    <EntitySet Name="v_cart_product" EntityType="ProductionModel.v_cart_product" />
+    <EntitySet Name="v_cartALL" EntityType="ProductionModel.v_cartALL" />
+    <EntitySet Name="v_orderheader_orderdetail" EntityType="ProductionModel.v_orderheader_orderdetail" />
+    <EntitySet Name="v_product_stock" EntityType="ProductionModel.v_product_stock" />
+    <EntitySet Name="ORDERHEADERs" EntityType="ProductionModel.ORDERHEADER" />
+    <EntitySet Name="PRODUCTs" EntityType="ProductionModel.PRODUCT" />
   </EntityContainer>
-  <EntityType Name="ORDERHEADER">
-    <Key>
-      <PropertyRef Name="OrderId" />
-    </Key>
-    <Property Name="OrderId" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CustomerID" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-    <Property Name="OrderDate" Type="DateTime" Precision="3" />
-    <Property Name="Payment" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
-    <Property Name="Total" Type="Int32" />
-    <Property Name="OrderStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-    <Property Name="ShipStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-    <Property Name="CreateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-    <Property Name="UpdateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-  </EntityType>
   <EntityType Name="PAYMENT">
     <Key>
       <PropertyRef Name="PayID" />
@@ -53,38 +41,7 @@
     <Property Name="UpdateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
     <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="PRODUCT">
-    <Key>
-      <PropertyRef Name="ProductID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ProductID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Price" Type="Int16" />
-    <Property Name="Category" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Uom" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Baking" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Flavor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="CreateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-    <Property Name="UpdateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-    <Property Name="Dripbag" Type="Boolean" />
-    <Property Name="Timelimit" Type="DateTime" Precision="3" />
-    <Property Name="Fragrance" Type="Byte" />
-    <Property Name="Sour" Type="Byte" />
-    <Property Name="Bitter" Type="Byte" />
-    <Property Name="Sweet" Type="Byte" />
-    <Property Name="STRONG" Type="Byte" />
-    <Property Name="Method" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="ImgA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="ImgB" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="ImgC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="ImgD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Weight" Type="Int16" />
+    <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="CARTDETAIL">
     <Key>
@@ -98,6 +55,7 @@
     <Property Name="UnitPrice" Type="Int16" />
     <Property Name="TotalPrice" Type="Int32" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="CARTHEATER">
     <Key>
@@ -146,5 +104,149 @@
     <Property Name="UpdateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
     <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="STOCKHEADER">
+    <Key>
+      <PropertyRef Name="StockID" />
+    </Key>
+    <Property Name="StockID" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductID" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="Uom" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Qty" Type="Int16" />
+    <Property Name="CreateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="UpdateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="v_cart_product">
+    <Key>
+      <PropertyRef Name="CartId" />
+      <PropertyRef Name="CartItemId" />
+    </Key>
+    <Property Name="CartId" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="CartItemId" Type="Int16" Nullable="false" />
+    <Property Name="ProductId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="QTY" Type="Int16" />
+    <Property Name="UnitPrice" Type="Int16" />
+    <Property Name="TotalPrice" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="v_cartALL">
+    <Key>
+      <PropertyRef Name="CartId" />
+      <PropertyRef Name="CartItemId" />
+    </Key>
+    <Property Name="CartId" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="CartItemId" Type="Int16" Nullable="false" />
+    <Property Name="ProductId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="QTY" Type="Int16" />
+    <Property Name="UnitPrice" Type="Int16" />
+    <Property Name="TotalPrice" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="v_orderheader_orderdetail">
+    <Key>
+      <PropertyRef Name="OrderId" />
+      <PropertyRef Name="OrderItem" />
+    </Key>
+    <Property Name="OrderId" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="OrderItem" Type="Int16" Nullable="false" />
+    <Property Name="CustomerID" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="OrderDate" Type="DateTime" Precision="3" />
+    <Property Name="Payment" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="ShipStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="ProductId" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="Qty" Type="Int16" />
+    <Property Name="Uom" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="UnitPrice" Type="Int16" />
+    <Property Name="Totle" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="v_product_stock">
+    <Key>
+      <PropertyRef Name="StockID" />
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="StockID" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="ProductID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Qty" Type="Int16" />
+    <Property Name="Uom" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Int16" />
+    <Property Name="Category" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Baking" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Flavor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Dripbag" Type="Boolean" />
+    <Property Name="Timelimit" Type="DateTime" Precision="3" />
+    <Property Name="Fragrance" Type="Byte" />
+    <Property Name="Sour" Type="Byte" />
+    <Property Name="Bitter" Type="Byte" />
+    <Property Name="Sweet" Type="Byte" />
+    <Property Name="STRONG" Type="Byte" />
+    <Property Name="Method" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ImgA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ImgB" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ImgC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ImgD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Weight" Type="Int16" />
+  </EntityType>
+  <EntityType Name="ORDERHEADER">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerID" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="OrderDate" Type="DateTime" Precision="3" />
+    <Property Name="Payment" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="Total" Type="Int32" />
+    <Property Name="ShipStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="CreateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="UpdateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="PRODUCT">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Int16" />
+    <Property Name="Category" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Uom" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Baking" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Flavor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CreateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="Timelimit" Type="DateTime" Precision="3" />
+    <Property Name="Fragrance" Type="Byte" />
+    <Property Name="Sour" Type="Byte" />
+    <Property Name="Bitter" Type="Byte" />
+    <Property Name="Sweet" Type="Byte" />
+    <Property Name="STRONG" Type="Byte" />
+    <Property Name="Method" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ImgA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ImgB" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ImgC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ImgD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Weight" Type="Int16" />
+    <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

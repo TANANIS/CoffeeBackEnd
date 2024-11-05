@@ -10,27 +10,10 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ORDERHEADERs">
-      <EntityTypeMapping TypeName="ProductionModel.ORDERHEADER">
-        <MappingFragment StoreEntitySet="ORDERHEADER">
-          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
-          <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
-          <ScalarProperty Name="ShipStatus" ColumnName="ShipStatus" />
-          <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
-          <ScalarProperty Name="Total" ColumnName="Total" />
-          <ScalarProperty Name="Payment" ColumnName="Payment" />
-          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="PAYMENTs">
       <EntityTypeMapping TypeName="ProductionModel.PAYMENT">
         <MappingFragment StoreEntitySet="PAYMENT">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
@@ -48,42 +31,10 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PRODUCTs">
-      <EntityTypeMapping TypeName="ProductionModel.PRODUCT">
-        <MappingFragment StoreEntitySet="PRODUCT">
-          <ScalarProperty Name="Weight" ColumnName="Weight" />
-          <ScalarProperty Name="ImgD" ColumnName="ImgD" />
-          <ScalarProperty Name="ImgC" ColumnName="ImgC" />
-          <ScalarProperty Name="ImgB" ColumnName="ImgB" />
-          <ScalarProperty Name="ImgA" ColumnName="ImgA" />
-          <ScalarProperty Name="Method" ColumnName="Method" />
-          <ScalarProperty Name="STRONG" ColumnName="STRONG" />
-          <ScalarProperty Name="Sweet" ColumnName="Sweet" />
-          <ScalarProperty Name="Bitter" ColumnName="Bitter" />
-          <ScalarProperty Name="Sour" ColumnName="Sour" />
-          <ScalarProperty Name="Fragrance" ColumnName="Fragrance" />
-          <ScalarProperty Name="Timelimit" ColumnName="Timelimit" />
-          <ScalarProperty Name="Dripbag" ColumnName="Dripbag" />
-          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
-          <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
-          <ScalarProperty Name="Flavor" ColumnName="Flavor" />
-          <ScalarProperty Name="Baking" ColumnName="Baking" />
-          <ScalarProperty Name="Country" ColumnName="Country" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Uom" ColumnName="Uom" />
-          <ScalarProperty Name="Category" ColumnName="Category" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="CARTDETAILs">
       <EntityTypeMapping TypeName="ProductionModel.CARTDETAIL">
         <MappingFragment StoreEntitySet="CARTDETAIL">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
           <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
@@ -125,6 +76,7 @@
     <EntitySetMapping Name="CUSTOMERs">
       <EntityTypeMapping TypeName="ProductionModel.CUSTOMER">
         <MappingFragment StoreEntitySet="CUSTOMER">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
@@ -141,6 +93,152 @@
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="STOCKHEADERs">
+      <EntityTypeMapping TypeName="ProductionModel.STOCKHEADER">
+        <MappingFragment StoreEntitySet="STOCKHEADER">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+          <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Uom" ColumnName="Uom" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="StockID" ColumnName="StockID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="v_cart_product">
+      <EntityTypeMapping TypeName="ProductionModel.v_cart_product">
+        <MappingFragment StoreEntitySet="v_cart_product">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="CartItemId" ColumnName="CartItemId" />
+          <ScalarProperty Name="CartId" ColumnName="CartId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="v_cartALL">
+      <EntityTypeMapping TypeName="ProductionModel.v_cartALL">
+        <MappingFragment StoreEntitySet="v_cartALL">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="CartItemId" ColumnName="CartItemId" />
+          <ScalarProperty Name="CartId" ColumnName="CartId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="v_orderheader_orderdetail">
+      <EntityTypeMapping TypeName="ProductionModel.v_orderheader_orderdetail">
+        <MappingFragment StoreEntitySet="v_orderheader_orderdetail">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Totle" ColumnName="Totle" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="Uom" ColumnName="Uom" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="ShipStatus" ColumnName="ShipStatus" />
+          <ScalarProperty Name="Payment" ColumnName="Payment" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="OrderItem" ColumnName="OrderItem" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="v_product_stock">
+      <EntityTypeMapping TypeName="ProductionModel.v_product_stock">
+        <MappingFragment StoreEntitySet="v_product_stock">
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="ImgD" ColumnName="ImgD" />
+          <ScalarProperty Name="ImgC" ColumnName="ImgC" />
+          <ScalarProperty Name="ImgB" ColumnName="ImgB" />
+          <ScalarProperty Name="ImgA" ColumnName="ImgA" />
+          <ScalarProperty Name="Method" ColumnName="Method" />
+          <ScalarProperty Name="STRONG" ColumnName="STRONG" />
+          <ScalarProperty Name="Sweet" ColumnName="Sweet" />
+          <ScalarProperty Name="Bitter" ColumnName="Bitter" />
+          <ScalarProperty Name="Sour" ColumnName="Sour" />
+          <ScalarProperty Name="Fragrance" ColumnName="Fragrance" />
+          <ScalarProperty Name="Timelimit" ColumnName="Timelimit" />
+          <ScalarProperty Name="Dripbag" ColumnName="Dripbag" />
+          <ScalarProperty Name="Flavor" ColumnName="Flavor" />
+          <ScalarProperty Name="Baking" ColumnName="Baking" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Uom" ColumnName="Uom" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="StockID" ColumnName="StockID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ORDERHEADERs">
+      <EntityTypeMapping TypeName="ProductionModel.ORDERHEADER">
+        <MappingFragment StoreEntitySet="ORDERHEADER">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+          <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+          <ScalarProperty Name="ShipStatus" ColumnName="ShipStatus" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Payment" ColumnName="Payment" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRODUCTs">
+      <EntityTypeMapping TypeName="ProductionModel.PRODUCT">
+        <MappingFragment StoreEntitySet="PRODUCT">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="ImgD" ColumnName="ImgD" />
+          <ScalarProperty Name="ImgC" ColumnName="ImgC" />
+          <ScalarProperty Name="ImgB" ColumnName="ImgB" />
+          <ScalarProperty Name="ImgA" ColumnName="ImgA" />
+          <ScalarProperty Name="Method" ColumnName="Method" />
+          <ScalarProperty Name="STRONG" ColumnName="STRONG" />
+          <ScalarProperty Name="Sweet" ColumnName="Sweet" />
+          <ScalarProperty Name="Bitter" ColumnName="Bitter" />
+          <ScalarProperty Name="Sour" ColumnName="Sour" />
+          <ScalarProperty Name="Fragrance" ColumnName="Fragrance" />
+          <ScalarProperty Name="Timelimit" ColumnName="Timelimit" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+          <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+          <ScalarProperty Name="Flavor" ColumnName="Flavor" />
+          <ScalarProperty Name="Baking" ColumnName="Baking" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Uom" ColumnName="Uom" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

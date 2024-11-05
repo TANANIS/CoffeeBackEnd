@@ -36,8 +36,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.BTNDetail = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.BTNNameSearch = new System.Windows.Forms.Button();
+            this.TBNameSearch = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -110,8 +110,8 @@
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.BTNDetail, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBox1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.BTNNameSearch, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.TBNameSearch, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -189,27 +189,28 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "點選會員進入進階：";
             // 
-            // button1
+            // BTNNameSearch
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.button1, 2);
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(3, 181);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(300, 83);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "搜尋";
-            this.button1.UseVisualStyleBackColor = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.BTNNameSearch, 2);
+            this.BTNNameSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BTNNameSearch.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.BTNNameSearch.Location = new System.Drawing.Point(3, 181);
+            this.BTNNameSearch.Name = "BTNNameSearch";
+            this.BTNNameSearch.Size = new System.Drawing.Size(300, 83);
+            this.BTNNameSearch.TabIndex = 0;
+            this.BTNNameSearch.Text = "搜尋";
+            this.BTNNameSearch.UseVisualStyleBackColor = true;
+            this.BTNNameSearch.Click += new System.EventHandler(this.BTNameSearch_Click);
             // 
-            // textBox1
+            // TBNameSearch
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.textBox1, 2);
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox1.Location = new System.Drawing.Point(3, 92);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(300, 40);
-            this.textBox1.TabIndex = 1;
+            this.tableLayoutPanel1.SetColumnSpan(this.TBNameSearch, 2);
+            this.TBNameSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TBNameSearch.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.TBNameSearch.Location = new System.Drawing.Point(3, 92);
+            this.TBNameSearch.Name = "TBNameSearch";
+            this.TBNameSearch.Size = new System.Drawing.Size(300, 40);
+            this.TBNameSearch.TabIndex = 1;
             // 
             // label3
             // 
@@ -613,8 +614,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button BTNDetail;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button BTNNameSearch;
+        private System.Windows.Forms.TextBox TBNameSearch;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel4;

@@ -57,7 +57,7 @@ namespace CoffeeBackEnd20221026.UserControls
             TBName.Text = member.Name;
             TBEmail.Text = member.Email;
             TBPhone.Text = member.Phone;
-            TBGender.Text = member.Gender.HasValue && member.Gender.Value ? "男" : "女"; 
+            TBGender.Text = member.Gender.HasValue && member.Gender.Value ? "男" : "女";
             DTPBirthday.Value = member.Birthday ?? DateTime.Now;
             DTPBirthday.Enabled = false;
             if (!string.IsNullOrEmpty(member.ImgSrc))
@@ -82,13 +82,13 @@ namespace CoffeeBackEnd20221026.UserControls
 
         private void BtnSuspend_Click(object sender, EventArgs e)
         {
-                MessageBox.Show("功能尚未實作");
-                ClearTextBoxes();
+            MessageBox.Show("功能未實作");
+            ClearTextBoxes();
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("功能尚未實作");
+            MessageBox.Show("功能未實作");
             ClearTextBoxes();
         }
 
@@ -119,22 +119,48 @@ namespace CoffeeBackEnd20221026.UserControls
 
         private void button4_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("功能尚未實作");
+            MessageBox.Show("功能未實作");
             ClearTextBoxes();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("功能尚未實作");
+            MessageBox.Show("功能未實作");
             ClearTextBoxes();
         }
 
         private void BTNDetail_Click(object sender, EventArgs e)
         {
+            // 檢查是否有選中的行
+            if (MemberDataGridView.SelectedRows.Count > 0)
+            {
+                // 切換到會員詳細資訊的 TabPage
+                tabControl.SelectedTab = TPuserDetail;
+            }
+            else
+            {
+                MessageBox.Show("請先選擇會員資料！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
 
+   
+
+        private void BTNameSearch_Click(object sender, EventArgs e)
+        {
+            string keyword = TBNameSearch.Text.Trim();
+
+            using (ProductionEntities context = new ProductionEntities())
+            {
+                // 過濾 Name 欄位包含關鍵字的會員
+                var filteredMembers = context.CUSTOMERs
+                    .Where(member => member.Name.Contains(keyword))
+                    .ToList();
+
+                // 更新 DataGridView 顯示過濾後的結果
+                MemberDataGridView.DataSource = filteredMembers;
+            }
         }
-        
-        }
+    }
 
 
 }

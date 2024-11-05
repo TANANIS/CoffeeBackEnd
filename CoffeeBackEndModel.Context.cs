@@ -26,12 +26,17 @@ namespace CoffeeBackEnd20221026
         }
     
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<ORDERHEADER> ORDERHEADERs { get; set; }
         public virtual DbSet<PAYMENT> PAYMENTs { get; set; }
-        public virtual DbSet<PRODUCT> PRODUCTs { get; set; }
         public virtual DbSet<CARTDETAIL> CARTDETAILs { get; set; }
         public virtual DbSet<CARTHEATER> CARTHEATERs { get; set; }
         public virtual DbSet<ORDERDETAIL> ORDERDETAILs { get; set; }
         public virtual DbSet<CUSTOMER> CUSTOMERs { get; set; }
+        public virtual DbSet<STOCKHEADER> STOCKHEADERs { get; set; }
+        public virtual DbSet<v_cart_product> v_cart_product { get; set; }
+        public virtual DbSet<v_cartALL> v_cartALL { get; set; }
+        public virtual DbSet<v_orderheader_orderdetail> v_orderheader_orderdetail { get; set; }
+        public virtual DbSet<v_product_stock> v_product_stock { get; set; }
+        public virtual DbSet<ORDERHEADER> ORDERHEADERs { get; set; }
+        public virtual DbSet<PRODUCT> PRODUCTs { get; set; }
     }
 }

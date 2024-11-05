@@ -21,5 +21,6 @@ namespace CoffeeBackEnd20221026
         public Nullable<short> UnitPrice { get; set; }
         public Nullable<int> TotalPrice { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
+        public string Status { get; set; }
     }
 }

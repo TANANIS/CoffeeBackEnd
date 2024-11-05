@@ -12,6 +12,7 @@
     <Property Name="UnitPrice" Type="smallint" />
     <Property Name="TotalPrice" Type="int" />
     <Property Name="CreateDate" Type="datetime" />
+    <Property Name="Status" Type="varchar" MaxLength="5" />
   </EntityType>
   <EntityType Name="CARTHEATER">
     <Key>
@@ -42,6 +43,7 @@
     <Property Name="UpdateUser" Type="varchar" MaxLength="12" />
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="Status" Type="varchar" MaxLength="5" />
   </EntityType>
   <EntityType Name="ORDERDETAIL">
     <Key>
@@ -71,12 +73,12 @@
     <Property Name="OrderDate" Type="datetime" />
     <Property Name="Payment" Type="char" MaxLength="6" />
     <Property Name="Total" Type="int" />
-    <Property Name="OrderStatus" Type="varchar" MaxLength="1" />
     <Property Name="ShipStatus" Type="varchar" MaxLength="1" />
     <Property Name="CreateUser" Type="varchar" MaxLength="12" />
     <Property Name="UpdateUser" Type="varchar" MaxLength="12" />
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="Status" Type="varchar" MaxLength="5" />
   </EntityType>
   <EntityType Name="PAYMENT">
     <Key>
@@ -96,6 +98,7 @@
     <Property Name="UpdateUser" Type="varchar" MaxLength="12" />
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="Status" Type="varchar" MaxLength="5" />
   </EntityType>
   <EntityType Name="PRODUCT">
     <Key>
@@ -115,6 +118,116 @@
     <Property Name="UpdateUser" Type="nvarchar" MaxLength="12" />
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="Timelimit" Type="datetime" />
+    <Property Name="Fragrance" Type="tinyint" />
+    <Property Name="Sour" Type="tinyint" />
+    <Property Name="Bitter" Type="tinyint" />
+    <Property Name="Sweet" Type="tinyint" />
+    <Property Name="STRONG" Type="tinyint" />
+    <Property Name="Method" Type="varchar" MaxLength="100" />
+    <Property Name="ImgA" Type="varchar" MaxLength="100" />
+    <Property Name="ImgB" Type="varchar" MaxLength="100" />
+    <Property Name="ImgC" Type="varchar" MaxLength="100" />
+    <Property Name="ImgD" Type="varchar" MaxLength="100" />
+    <Property Name="Weight" Type="smallint" />
+    <Property Name="Status" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="STOCKHEADER">
+    <Key>
+      <PropertyRef Name="StockID" />
+    </Key>
+    <Property Name="StockID" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductID" Type="varchar" MaxLength="12" />
+    <Property Name="Uom" Type="varchar" MaxLength="10" />
+    <Property Name="Qty" Type="smallint" />
+    <Property Name="CreateUser" Type="varchar" MaxLength="12" />
+    <Property Name="UpdateUser" Type="varchar" MaxLength="12" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="Status" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'PROJECT.dbo.v_cart_product' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="v_cart_product">
+    <Key>
+      <PropertyRef Name="CartId" />
+      <PropertyRef Name="CartItemId" />
+    </Key>
+    <Property Name="CartId" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="CartItemId" Type="smallint" Nullable="false" />
+    <Property Name="ProductId" Type="varchar" MaxLength="100" />
+    <Property Name="QTY" Type="smallint" />
+    <Property Name="UnitPrice" Type="smallint" />
+    <Property Name="TotalPrice" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
+    <Property Name="UserId" Type="varchar" MaxLength="12" />
+    <Property Name="Status" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'PROJECT.dbo.v_cartALL' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="v_cartALL">
+    <Key>
+      <PropertyRef Name="CartId" />
+      <PropertyRef Name="CartItemId" />
+    </Key>
+    <Property Name="CartId" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="CartItemId" Type="smallint" Nullable="false" />
+    <Property Name="ProductId" Type="varchar" MaxLength="100" />
+    <Property Name="QTY" Type="smallint" />
+    <Property Name="UnitPrice" Type="smallint" />
+    <Property Name="TotalPrice" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UserId" Type="varchar" MaxLength="12" />
+    <Property Name="Status" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'PROJECT.dbo.v_orderheader_orderdetail' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="v_orderheader_orderdetail">
+    <Key>
+      <PropertyRef Name="OrderId" />
+      <PropertyRef Name="OrderItem" />
+    </Key>
+    <Property Name="OrderId" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="OrderItem" Type="smallint" Nullable="false" />
+    <Property Name="CustomerID" Type="varchar" MaxLength="12" />
+    <Property Name="OrderDate" Type="datetime" />
+    <Property Name="Payment" Type="char" MaxLength="6" />
+    <Property Name="ShipStatus" Type="varchar" MaxLength="1" />
+    <Property Name="ProductId" Type="varchar" MaxLength="12" />
+    <Property Name="Qty" Type="smallint" />
+    <Property Name="Uom" Type="nvarchar" MaxLength="6" />
+    <Property Name="UnitPrice" Type="smallint" />
+    <Property Name="Totle" Type="int" />
+    <Property Name="Status" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'PROJECT.dbo.v_product_stock' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="v_product_stock">
+    <Key>
+      <PropertyRef Name="StockID" />
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="StockID" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="ProductID" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Qty" Type="smallint" />
+    <Property Name="Uom" Type="varchar" MaxLength="10" />
+    <Property Name="Price" Type="smallint" />
+    <Property Name="Category" Type="varchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="Country" Type="varchar" MaxLength="100" />
+    <Property Name="Baking" Type="varchar" MaxLength="100" />
+    <Property Name="Flavor" Type="varchar" MaxLength="100" />
     <Property Name="Dripbag" Type="bit" />
     <Property Name="Timelimit" Type="datetime" />
     <Property Name="Fragrance" Type="tinyint" />
@@ -129,14 +242,6 @@
     <Property Name="ImgD" Type="varchar" MaxLength="100" />
     <Property Name="Weight" Type="smallint" />
   </EntityType>
-  <EntityType Name="Users">
-    <Key>
-      <PropertyRef Name="UserID" />
-    </Key>
-    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
-  </EntityType>
   <EntityContainer Name="ProductionModelStoreContainer">
     <EntitySet Name="CARTDETAIL" EntityType="Self.CARTDETAIL" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CARTHEATER" EntityType="Self.CARTHEATER" Schema="dbo" store:Type="Tables" />
@@ -145,6 +250,78 @@
     <EntitySet Name="ORDERHEADER" EntityType="Self.ORDERHEADER" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PAYMENT" EntityType="Self.PAYMENT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="STOCKHEADER" EntityType="Self.STOCKHEADER" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="v_cart_product" EntityType="Self.v_cart_product" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [v_cart_product].[CartId] AS [CartId], 
+    [v_cart_product].[CartItemId] AS [CartItemId], 
+    [v_cart_product].[ProductId] AS [ProductId], 
+    [v_cart_product].[QTY] AS [QTY], 
+    [v_cart_product].[UnitPrice] AS [UnitPrice], 
+    [v_cart_product].[TotalPrice] AS [TotalPrice], 
+    [v_cart_product].[CreateDate] AS [CreateDate], 
+    [v_cart_product].[ProductName] AS [ProductName], 
+    [v_cart_product].[UserId] AS [UserId], 
+    [v_cart_product].[Status] AS [Status]
+    FROM [dbo].[v_cart_product] AS [v_cart_product]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="v_cartALL" EntityType="Self.v_cartALL" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [v_cartALL].[CartId] AS [CartId], 
+    [v_cartALL].[CartItemId] AS [CartItemId], 
+    [v_cartALL].[ProductId] AS [ProductId], 
+    [v_cartALL].[QTY] AS [QTY], 
+    [v_cartALL].[UnitPrice] AS [UnitPrice], 
+    [v_cartALL].[TotalPrice] AS [TotalPrice], 
+    [v_cartALL].[CreateDate] AS [CreateDate], 
+    [v_cartALL].[UserId] AS [UserId], 
+    [v_cartALL].[Status] AS [Status]
+    FROM [dbo].[v_cartALL] AS [v_cartALL]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="v_orderheader_orderdetail" EntityType="Self.v_orderheader_orderdetail" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [v_orderheader_orderdetail].[OrderId] AS [OrderId], 
+    [v_orderheader_orderdetail].[OrderItem] AS [OrderItem], 
+    [v_orderheader_orderdetail].[CustomerID] AS [CustomerID], 
+    [v_orderheader_orderdetail].[OrderDate] AS [OrderDate], 
+    [v_orderheader_orderdetail].[Payment] AS [Payment], 
+    [v_orderheader_orderdetail].[ShipStatus] AS [ShipStatus], 
+    [v_orderheader_orderdetail].[ProductId] AS [ProductId], 
+    [v_orderheader_orderdetail].[Qty] AS [Qty], 
+    [v_orderheader_orderdetail].[Uom] AS [Uom], 
+    [v_orderheader_orderdetail].[UnitPrice] AS [UnitPrice], 
+    [v_orderheader_orderdetail].[Totle] AS [Totle], 
+    [v_orderheader_orderdetail].[Status] AS [Status]
+    FROM [dbo].[v_orderheader_orderdetail] AS [v_orderheader_orderdetail]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="v_product_stock" EntityType="Self.v_product_stock" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [v_product_stock].[StockID] AS [StockID], 
+    [v_product_stock].[ProductID] AS [ProductID], 
+    [v_product_stock].[ProductName] AS [ProductName], 
+    [v_product_stock].[Qty] AS [Qty], 
+    [v_product_stock].[Uom] AS [Uom], 
+    [v_product_stock].[Price] AS [Price], 
+    [v_product_stock].[Category] AS [Category], 
+    [v_product_stock].[Description] AS [Description], 
+    [v_product_stock].[Country] AS [Country], 
+    [v_product_stock].[Baking] AS [Baking], 
+    [v_product_stock].[Flavor] AS [Flavor], 
+    [v_product_stock].[Dripbag] AS [Dripbag], 
+    [v_product_stock].[Timelimit] AS [Timelimit], 
+    [v_product_stock].[Fragrance] AS [Fragrance], 
+    [v_product_stock].[Sour] AS [Sour], 
+    [v_product_stock].[Bitter] AS [Bitter], 
+    [v_product_stock].[Sweet] AS [Sweet], 
+    [v_product_stock].[STRONG] AS [STRONG], 
+    [v_product_stock].[Method] AS [Method], 
+    [v_product_stock].[ImgA] AS [ImgA], 
+    [v_product_stock].[ImgB] AS [ImgB], 
+    [v_product_stock].[ImgC] AS [ImgC], 
+    [v_product_stock].[ImgD] AS [ImgD], 
+    [v_product_stock].[Weight] AS [Weight]
+    FROM [dbo].[v_product_stock] AS [v_product_stock]</DefiningQuery>
+    </EntitySet>
   </EntityContainer>
 </Schema>

@@ -28,5 +28,6 @@ namespace CoffeeBackEnd20221026
         public string UpdateUser { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
+        public string Status { get; set; }
     }
 }

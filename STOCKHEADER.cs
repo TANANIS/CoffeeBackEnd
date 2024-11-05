@@ -12,20 +12,13 @@ namespace CoffeeBackEnd20221026
     using System;
     using System.Collections.Generic;
     
-    public partial class CUSTOMER
+    public partial class STOCKHEADER
     {
-        public string CustomerID { get; set; }
+        public string StockID { get; set; }
         public int ID { get; set; }
-        public string UserId { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-        public string Name { get; set; }
-        public Nullable<bool> Gender { get; set; }
-        public Nullable<System.DateTime> Birthday { get; set; }
-        public string ImgSrc { get; set; }
-        public string Language { get; set; }
-        public string ReceiverAddress { get; set; }
+        public string ProductID { get; set; }
+        public string Uom { get; set; }
+        public Nullable<short> Qty { get; set; }
         public string CreateUser { get; set; }
         public string UpdateUser { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }

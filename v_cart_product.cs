@@ -12,19 +12,17 @@ namespace CoffeeBackEnd20221026
     using System;
     using System.Collections.Generic;
     
-    public partial class ORDERHEADER
+    public partial class v_cart_product
     {
-        public string OrderId { get; set; }
-        public int ID { get; set; }
-        public string CustomerID { get; set; }
-        public Nullable<System.DateTime> OrderDate { get; set; }
-        public string Payment { get; set; }
-        public Nullable<int> Total { get; set; }
-        public string ShipStatus { get; set; }
-        public string CreateUser { get; set; }
-        public string UpdateUser { get; set; }
+        public string CartId { get; set; }
+        public short CartItemId { get; set; }
+        public string ProductId { get; set; }
+        public Nullable<short> QTY { get; set; }
+        public Nullable<short> UnitPrice { get; set; }
+        public Nullable<int> TotalPrice { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
-        public Nullable<System.DateTime> UpdateDate { get; set; }
+        public string ProductName { get; set; }
+        public string UserId { get; set; }
         public string Status { get; set; }
     }
 }

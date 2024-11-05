@@ -4,15 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ff3928147d244c9e9f7b4b81ab7ca360" Name="Diagram1" ZoomLevel="60">
+      <Diagram DiagramId="ff3928147d244c9e9f7b4b81ab7ca360" Name="Diagram1" ZoomLevel="115">
         <EntityTypeShape EntityType="ProductionModel.User" Width="1.5" PointX="2" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProductionModel.ORDERHEADER" Width="1.5" PointX="7.625" PointY="5.375" />
         <EntityTypeShape EntityType="ProductionModel.PAYMENT" Width="1.5" PointX="7.625" PointY="9.125" />
-        <EntityTypeShape EntityType="ProductionModel.PRODUCT" Width="1.5" PointX="3.875" PointY="5.375" />
         <EntityTypeShape EntityType="ProductionModel.CARTDETAIL" Width="1.5" PointX="2" PointY="9.5" />
         <EntityTypeShape EntityType="ProductionModel.CARTHEATER" Width="1.5" PointX="2" PointY="7.375" />
         <EntityTypeShape EntityType="ProductionModel.ORDERDETAIL" Width="1.5" PointX="5.875" PointY="9.625" />
         <EntityTypeShape EntityType="ProductionModel.CUSTOMER" Width="1.5" PointX="5.75" PointY="5.375" />
+        <EntityTypeShape EntityType="ProductionModel.STOCKHEADER" Width="1.5" PointX="2.125" PointY="1.75" />
+        <EntityTypeShape EntityType="ProductionModel.v_cart_product" Width="1.5" PointX="3.875" PointY="1.75" />
+        <EntityTypeShape EntityType="ProductionModel.v_cartALL" Width="1.5" PointX="5.75" PointY="1.75" />
+        <EntityTypeShape EntityType="ProductionModel.v_orderheader_orderdetail" Width="1.5" PointX="7.75" PointY="1.75" />
+        <EntityTypeShape EntityType="ProductionModel.v_product_stock" Width="1.5" PointX="9.625" PointY="1.75" />
+        <EntityTypeShape EntityType="ProductionModel.ORDERHEADER" Width="1.5" PointX="7.625" PointY="5.375" />
+        <EntityTypeShape EntityType="ProductionModel.PRODUCT" Width="1.5" PointX="3.875" PointY="5.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
