@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProductionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CARTDETAIL">
+    <Key>
+      <PropertyRef Name="CartId" />
+      <PropertyRef Name="CartItemId" />
+    </Key>
+    <Property Name="CartId" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="CartItemId" Type="smallint" Nullable="false" />
+    <Property Name="ProductId" Type="varchar" MaxLength="100" />
+    <Property Name="QTY" Type="smallint" />
+    <Property Name="UnitPrice" Type="smallint" />
+    <Property Name="TotalPrice" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CARTHEATER">
+    <Key>
+      <PropertyRef Name="CartId" />
+    </Key>
+    <Property Name="CartId" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="UserId" Type="varchar" MaxLength="12" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="Status" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="CUSTOMER">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="12" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Phone" Type="varchar" MaxLength="10" />
+    <Property Name="Name" Type="varchar" MaxLength="12" />
+    <Property Name="Gender" Type="bit" />
+    <Property Name="Birthday" Type="date" />
+    <Property Name="ImgSrc" Type="varchar" MaxLength="50" />
+    <Property Name="Language" Type="varchar" MaxLength="5" />
+    <Property Name="ReceiverAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateUser" Type="varchar" MaxLength="12" />
+    <Property Name="UpdateUser" Type="varchar" MaxLength="12" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ORDERDETAIL">
+    <Key>
+      <PropertyRef Name="OrderId" />
+      <PropertyRef Name="OrderItem" />
+    </Key>
+    <Property Name="OrderId" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="OrderItem" Type="smallint" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductId" Type="varchar" MaxLength="12" />
+    <Property Name="Qty" Type="smallint" />
+    <Property Name="Uom" Type="nvarchar" MaxLength="6" />
+    <Property Name="UnitPrice" Type="smallint" />
+    <Property Name="Totle" Type="int" />
+    <Property Name="CreateUser" Type="varchar" MaxLength="12" />
+    <Property Name="UpdateUser" Type="varchar" MaxLength="12" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ORDERHEADER">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerID" Type="varchar" MaxLength="12" />
+    <Property Name="OrderDate" Type="datetime" />
+    <Property Name="Payment" Type="char" MaxLength="6" />
+    <Property Name="Total" Type="int" />
+    <Property Name="OrderStatus" Type="varchar" MaxLength="1" />
+    <Property Name="ShipStatus" Type="varchar" MaxLength="1" />
+    <Property Name="CreateUser" Type="varchar" MaxLength="12" />
+    <Property Name="UpdateUser" Type="varchar" MaxLength="12" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="PAYMENT">
+    <Key>
+      <PropertyRef Name="PayID" />
+    </Key>
+    <Property Name="PayID" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderId" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="CustomerId" Type="varchar" MaxLength="12" />
+    <Property Name="PaymentDate" Type="datetime" />
+    <Property Name="PaymentAmount" Type="int" />
+    <Property Name="Currency" Type="varchar" MaxLength="12" />
+    <Property Name="PaymentMethod" Type="varchar" MaxLength="12" />
+    <Property Name="PaymentStatus" Type="varchar" MaxLength="12" />
+    <Property Name="TransactionId" Type="varchar" MaxLength="12" />
+    <Property Name="CreateUser" Type="varchar" MaxLength="12" />
+    <Property Name="UpdateUser" Type="varchar" MaxLength="12" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="PRODUCT">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductID" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Price" Type="smallint" />
+    <Property Name="Category" Type="varchar" MaxLength="100" />
+    <Property Name="Uom" Type="varchar" MaxLength="10" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="Country" Type="varchar" MaxLength="100" />
+    <Property Name="Baking" Type="varchar" MaxLength="100" />
+    <Property Name="Flavor" Type="varchar" MaxLength="100" />
+    <Property Name="CreateUser" Type="nvarchar" MaxLength="12" />
+    <Property Name="UpdateUser" Type="nvarchar" MaxLength="12" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="Dripbag" Type="bit" />
+    <Property Name="Timelimit" Type="datetime" />
+    <Property Name="Fragrance" Type="tinyint" />
+    <Property Name="Sour" Type="tinyint" />
+    <Property Name="Bitter" Type="tinyint" />
+    <Property Name="Sweet" Type="tinyint" />
+    <Property Name="STRONG" Type="tinyint" />
+    <Property Name="Method" Type="varchar" MaxLength="100" />
+    <Property Name="ImgA" Type="varchar" MaxLength="100" />
+    <Property Name="ImgB" Type="varchar" MaxLength="100" />
+    <Property Name="ImgC" Type="varchar" MaxLength="100" />
+    <Property Name="ImgD" Type="varchar" MaxLength="100" />
+    <Property Name="Weight" Type="smallint" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="ProductionModelStoreContainer">
+    <EntitySet Name="CARTDETAIL" EntityType="Self.CARTDETAIL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CARTHEATER" EntityType="Self.CARTHEATER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ORDERDETAIL" EntityType="Self.ORDERDETAIL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ORDERHEADER" EntityType="Self.ORDERHEADER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PAYMENT" EntityType="Self.PAYMENT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
