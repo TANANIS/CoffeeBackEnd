@@ -49,6 +49,8 @@
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="Status" Type="varchar" MaxLength="5" />
+          <Property Name="IsSuspended" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ORDERDETAIL">
           <Key>
@@ -123,19 +125,16 @@
           <Property Name="UpdateUser" Type="nvarchar" MaxLength="12" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
-          <Property Name="Timelimit" Type="datetime" />
+          <Property Name="Timelimit" Type="nvarchar" MaxLength="4" />
           <Property Name="Fragrance" Type="tinyint" />
           <Property Name="Sour" Type="tinyint" />
           <Property Name="Bitter" Type="tinyint" />
           <Property Name="Sweet" Type="tinyint" />
           <Property Name="STRONG" Type="tinyint" />
           <Property Name="Method" Type="varchar" MaxLength="100" />
-          <Property Name="ImgA" Type="varchar" MaxLength="100" />
-          <Property Name="ImgB" Type="varchar" MaxLength="100" />
-          <Property Name="ImgC" Type="varchar" MaxLength="100" />
-          <Property Name="ImgD" Type="varchar" MaxLength="100" />
-          <Property Name="Weight" Type="smallint" />
-          <Property Name="Status" Type="varchar" MaxLength="5" />
+          <Property Name="Img" Type="varchar" MaxLength="100" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Weight" Type="nchar" MaxLength="4" />
         </EntityType>
         <EntityType Name="STOCKHEADER">
           <Key>
@@ -177,6 +176,7 @@
           <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
           <Property Name="UserId" Type="varchar" MaxLength="12" />
           <Property Name="Status" Type="varchar" MaxLength="5" />
+          <Property Name="d_Status" Type="varchar" MaxLength="5" />
         </EntityType>
         <!--產生期間發現錯誤:
 警告 6002: 資料表/檢視 'PROJECT.dbo.v_cartALL' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
@@ -268,7 +268,8 @@
     [v_cart_product].[CreateDate] AS [CreateDate], 
     [v_cart_product].[ProductName] AS [ProductName], 
     [v_cart_product].[UserId] AS [UserId], 
-    [v_cart_product].[Status] AS [Status]
+    [v_cart_product].[Status] AS [Status], 
+    [v_cart_product].[d_Status] AS [d_Status]
     FROM [dbo].[v_cart_product] AS [v_cart_product]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="v_cartALL" EntityType="Self.v_cartALL" store:Type="Views" store:Schema="dbo">
@@ -438,6 +439,8 @@
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="IsSuspended" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="STOCKHEADER">
           <Key>
@@ -469,6 +472,7 @@
           <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="d_Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="v_cartALL">
           <Key>
@@ -568,19 +572,16 @@
           <Property Name="UpdateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-          <Property Name="Timelimit" Type="DateTime" Precision="3" />
+          <Property Name="Timelimit" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
           <Property Name="Fragrance" Type="Byte" />
           <Property Name="Sour" Type="Byte" />
           <Property Name="Bitter" Type="Byte" />
           <Property Name="Sweet" Type="Byte" />
           <Property Name="STRONG" Type="Byte" />
           <Property Name="Method" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ImgA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ImgB" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ImgC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ImgD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Weight" Type="Int16" />
-          <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Img" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Weight" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -663,6 +664,8 @@
           <EntitySetMapping Name="CUSTOMERs">
             <EntityTypeMapping TypeName="ProductionModel.CUSTOMER">
               <MappingFragment StoreEntitySet="CUSTOMER">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsSuspended" ColumnName="IsSuspended" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
@@ -702,6 +705,7 @@
           <EntitySetMapping Name="v_cart_product">
             <EntityTypeMapping TypeName="ProductionModel.v_cart_product">
               <MappingFragment StoreEntitySet="v_cart_product">
+                <ScalarProperty Name="d_Status" ColumnName="d_Status" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -799,12 +803,9 @@
           <EntitySetMapping Name="PRODUCTs">
             <EntityTypeMapping TypeName="ProductionModel.PRODUCT">
               <MappingFragment StoreEntitySet="PRODUCT">
-                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="ImgD" ColumnName="ImgD" />
-                <ScalarProperty Name="ImgC" ColumnName="ImgC" />
-                <ScalarProperty Name="ImgB" ColumnName="ImgB" />
-                <ScalarProperty Name="ImgA" ColumnName="ImgA" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
                 <ScalarProperty Name="Method" ColumnName="Method" />
                 <ScalarProperty Name="STRONG" ColumnName="STRONG" />
                 <ScalarProperty Name="Sweet" ColumnName="Sweet" />

@@ -28,18 +28,15 @@ namespace CoffeeBackEnd20221026
         public string UpdateUser { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
-        public Nullable<System.DateTime> Timelimit { get; set; }
+        public string Timelimit { get; set; }
         public Nullable<byte> Fragrance { get; set; }
         public Nullable<byte> Sour { get; set; }
         public Nullable<byte> Bitter { get; set; }
         public Nullable<byte> Sweet { get; set; }
         public Nullable<byte> STRONG { get; set; }
         public string Method { get; set; }
-        public string ImgA { get; set; }
-        public string ImgB { get; set; }
-        public string ImgC { get; set; }
-        public string ImgD { get; set; }
-        public Nullable<short> Weight { get; set; }
-        public string Status { get; set; }
+        public string Img { get; set; }
+        public Nullable<bool> Status { get; set; }
+        public string Weight { get; set; }
     }
 }

@@ -40,6 +40,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.CBFilterColumn = new System.Windows.Forms.ComboBox();
             this.CBFilterValue = new System.Windows.Forms.ComboBox();
+            this.BTNClearFilters = new System.Windows.Forms.Button();
             this.ProdDetailTabPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label18 = new System.Windows.Forms.Label();
@@ -50,7 +51,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.TBImgBPath = new System.Windows.Forms.TextBox();
             this.TBFlavor = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.TBUOM = new System.Windows.Forms.TextBox();
@@ -58,10 +58,9 @@
             this.TBproductID = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.BTNPicUpdate = new System.Windows.Forms.Button();
+            this.BTNAddImage = new System.Windows.Forms.Button();
             this.BTNPicDelete = new System.Windows.Forms.Button();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.CBImageSelect = new System.Windows.Forms.ComboBox();
+            this.PBProduct = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.TBprice = new System.Windows.Forms.TextBox();
@@ -72,10 +71,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.BTNdescription = new System.Windows.Forms.Button();
             this.BTNback = new System.Windows.Forms.Button();
-            this.DTPTimelimit = new System.Windows.Forms.DateTimePicker();
-            this.TBImgAPath = new System.Windows.Forms.TextBox();
-            this.TBImgCPath = new System.Windows.Forms.TextBox();
-            this.TBImgDPath = new System.Windows.Forms.TextBox();
             this.BtnUpdate = new System.Windows.Forms.Button();
             this.BtnDelete = new System.Windows.Forms.Button();
             this.CBSweet = new System.Windows.Forms.ComboBox();
@@ -87,14 +82,15 @@
             this.CBFragrance = new System.Windows.Forms.ComboBox();
             this.CBSour = new System.Windows.Forms.ComboBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.BTNClearFilters = new System.Windows.Forms.Button();
+            this.CBTimeLimit = new System.Windows.Forms.ComboBox();
+            this.TBimg = new System.Windows.Forms.TextBox();
             this.ProdTabControl.SuspendLayout();
             this.ProdGridTabPage.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ProdDataGridView)).BeginInit();
             this.ProdDetailTabPage.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PBProduct)).BeginInit();
             this.SuspendLayout();
             // 
             // ProdTabControl
@@ -270,6 +266,17 @@
             this.CBFilterValue.TabIndex = 9;
             this.CBFilterValue.SelectedIndexChanged += new System.EventHandler(this.CBFilterValue_SelectedIndexChanged);
             // 
+            // BTNClearFilters
+            // 
+            this.BTNClearFilters.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.BTNClearFilters.Location = new System.Drawing.Point(3, 327);
+            this.BTNClearFilters.Name = "BTNClearFilters";
+            this.BTNClearFilters.Size = new System.Drawing.Size(270, 48);
+            this.BTNClearFilters.TabIndex = 11;
+            this.BTNClearFilters.Text = "清除篩選";
+            this.BTNClearFilters.UseVisualStyleBackColor = true;
+            this.BTNClearFilters.Click += new System.EventHandler(this.BTNClearFilters_Click);
+            // 
             // ProdDetailTabPage
             // 
             this.ProdDetailTabPage.Controls.Add(this.tableLayoutPanel2);
@@ -290,6 +297,8 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel2.Controls.Add(this.TBimg, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.CBTimeLimit, 1, 4);
             this.tableLayoutPanel2.Controls.Add(this.label18, 4, 7);
             this.tableLayoutPanel2.Controls.Add(this.label19, 5, 7);
             this.tableLayoutPanel2.Controls.Add(this.label16, 5, 5);
@@ -298,7 +307,6 @@
             this.tableLayoutPanel2.Controls.Add(this.label12, 4, 3);
             this.tableLayoutPanel2.Controls.Add(this.label9, 5, 1);
             this.tableLayoutPanel2.Controls.Add(this.label6, 4, 1);
-            this.tableLayoutPanel2.Controls.Add(this.TBImgBPath, 2, 9);
             this.tableLayoutPanel2.Controls.Add(this.TBFlavor, 1, 5);
             this.tableLayoutPanel2.Controls.Add(this.label15, 0, 5);
             this.tableLayoutPanel2.Controls.Add(this.TBUOM, 1, 3);
@@ -306,10 +314,9 @@
             this.tableLayoutPanel2.Controls.Add(this.TBproductID, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.label10, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.label7, 4, 0);
-            this.tableLayoutPanel2.Controls.Add(this.BTNPicUpdate, 3, 7);
+            this.tableLayoutPanel2.Controls.Add(this.BTNAddImage, 3, 7);
             this.tableLayoutPanel2.Controls.Add(this.BTNPicDelete, 2, 7);
-            this.tableLayoutPanel2.Controls.Add(this.pictureBox, 2, 1);
-            this.tableLayoutPanel2.Controls.Add(this.CBImageSelect, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.PBProduct, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.label2, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.label4, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.TBprice, 1, 2);
@@ -320,10 +327,6 @@
             this.tableLayoutPanel2.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.BTNdescription, 1, 10);
             this.tableLayoutPanel2.Controls.Add(this.BTNback, 0, 10);
-            this.tableLayoutPanel2.Controls.Add(this.DTPTimelimit, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.TBImgAPath, 2, 8);
-            this.tableLayoutPanel2.Controls.Add(this.TBImgCPath, 2, 10);
-            this.tableLayoutPanel2.Controls.Add(this.TBImgDPath, 3, 8);
             this.tableLayoutPanel2.Controls.Add(this.BtnUpdate, 5, 10);
             this.tableLayoutPanel2.Controls.Add(this.BtnDelete, 4, 10);
             this.tableLayoutPanel2.Controls.Add(this.CBSweet, 5, 8);
@@ -449,14 +452,6 @@
             this.label6.Text = "處理方法";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // TBImgBPath
-            // 
-            this.TBImgBPath.Location = new System.Drawing.Point(371, 489);
-            this.TBImgBPath.Name = "TBImgBPath";
-            this.TBImgBPath.Size = new System.Drawing.Size(100, 22);
-            this.TBImgBPath.TabIndex = 82;
-            this.TBImgBPath.Visible = false;
-            // 
             // TBFlavor
             // 
             this.TBFlavor.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -533,17 +528,17 @@
             this.label7.Text = "商品類型";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // BTNPicUpdate
+            // BTNAddImage
             // 
-            this.BTNPicUpdate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BTNPicUpdate.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.BTNPicUpdate.Location = new System.Drawing.Point(555, 381);
-            this.BTNPicUpdate.Name = "BTNPicUpdate";
-            this.BTNPicUpdate.Size = new System.Drawing.Size(178, 48);
-            this.BTNPicUpdate.TabIndex = 25;
-            this.BTNPicUpdate.Text = "新增照片";
-            this.BTNPicUpdate.UseVisualStyleBackColor = true;
-            this.BTNPicUpdate.Click += new System.EventHandler(this.BTNPicUpdate_Click);
+            this.BTNAddImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BTNAddImage.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.BTNAddImage.Location = new System.Drawing.Point(555, 381);
+            this.BTNAddImage.Name = "BTNAddImage";
+            this.BTNAddImage.Size = new System.Drawing.Size(178, 48);
+            this.BTNAddImage.TabIndex = 25;
+            this.BTNAddImage.Text = "新增照片";
+            this.BTNAddImage.UseVisualStyleBackColor = true;
+            this.BTNAddImage.Click += new System.EventHandler(this.BTNAddImage_Click);
             // 
             // BTNPicDelete
             // 
@@ -557,28 +552,17 @@
             this.BTNPicDelete.UseVisualStyleBackColor = true;
             this.BTNPicDelete.Click += new System.EventHandler(this.BTNPicDelete_Click);
             // 
-            // pictureBox
+            // PBProduct
             // 
-            this.pictureBox.BackColor = System.Drawing.Color.DimGray;
-            this.tableLayoutPanel2.SetColumnSpan(this.pictureBox, 2);
-            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox.Location = new System.Drawing.Point(371, 57);
-            this.pictureBox.Name = "pictureBox";
-            this.tableLayoutPanel2.SetRowSpan(this.pictureBox, 6);
-            this.pictureBox.Size = new System.Drawing.Size(362, 318);
-            this.pictureBox.TabIndex = 22;
-            this.pictureBox.TabStop = false;
-            // 
-            // CBImageSelect
-            // 
-            this.CBImageSelect.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CBImageSelect.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.CBImageSelect.FormattingEnabled = true;
-            this.CBImageSelect.Location = new System.Drawing.Point(555, 3);
-            this.CBImageSelect.Name = "CBImageSelect";
-            this.CBImageSelect.Size = new System.Drawing.Size(178, 35);
-            this.CBImageSelect.TabIndex = 23;
-            this.CBImageSelect.Text = "當前照片頁面";
+            this.PBProduct.BackColor = System.Drawing.Color.DimGray;
+            this.tableLayoutPanel2.SetColumnSpan(this.PBProduct, 2);
+            this.PBProduct.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PBProduct.Location = new System.Drawing.Point(371, 57);
+            this.PBProduct.Name = "PBProduct";
+            this.tableLayoutPanel2.SetRowSpan(this.PBProduct, 6);
+            this.PBProduct.Size = new System.Drawing.Size(362, 318);
+            this.PBProduct.TabIndex = 22;
+            this.PBProduct.TabStop = false;
             // 
             // label2
             // 
@@ -694,41 +678,6 @@
             this.BTNback.UseVisualStyleBackColor = true;
             this.BTNback.Click += new System.EventHandler(this.BTNback_Click);
             // 
-            // DTPTimelimit
-            // 
-            this.DTPTimelimit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.DTPTimelimit.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.DTPTimelimit.Location = new System.Drawing.Point(187, 219);
-            this.DTPTimelimit.Name = "DTPTimelimit";
-            this.DTPTimelimit.Size = new System.Drawing.Size(178, 40);
-            this.DTPTimelimit.TabIndex = 80;
-            // 
-            // TBImgAPath
-            // 
-            this.TBImgAPath.Location = new System.Drawing.Point(371, 435);
-            this.TBImgAPath.Name = "TBImgAPath";
-            this.TBImgAPath.Size = new System.Drawing.Size(100, 22);
-            this.TBImgAPath.TabIndex = 81;
-            this.TBImgAPath.Visible = false;
-            // 
-            // TBImgCPath
-            // 
-            this.TBImgCPath.Location = new System.Drawing.Point(371, 543);
-            this.TBImgCPath.Name = "TBImgCPath";
-            this.TBImgCPath.Size = new System.Drawing.Size(100, 22);
-            this.TBImgCPath.TabIndex = 83;
-            this.TBImgCPath.Visible = false;
-            // 
-            // TBImgDPath
-            // 
-            this.TBImgDPath.Location = new System.Drawing.Point(555, 435);
-            this.TBImgDPath.Name = "TBImgDPath";
-            this.TBImgDPath.Size = new System.Drawing.Size(100, 22);
-            this.TBImgDPath.TabIndex = 84;
-            this.TBImgDPath.Visible = false;
-            // 
             // BtnUpdate
             // 
             this.BtnUpdate.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -827,16 +776,22 @@
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             // 
-            // BTNClearFilters
+            // CBTimeLimit
             // 
-            this.BTNClearFilters.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.BTNClearFilters.Location = new System.Drawing.Point(3, 327);
-            this.BTNClearFilters.Name = "BTNClearFilters";
-            this.BTNClearFilters.Size = new System.Drawing.Size(270, 48);
-            this.BTNClearFilters.TabIndex = 11;
-            this.BTNClearFilters.Text = "清除篩選";
-            this.BTNClearFilters.UseVisualStyleBackColor = true;
-            this.BTNClearFilters.Click += new System.EventHandler(this.BTNClearFilters_Click);
+            this.CBTimeLimit.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.CBTimeLimit.FormattingEnabled = true;
+            this.CBTimeLimit.Location = new System.Drawing.Point(187, 219);
+            this.CBTimeLimit.Name = "CBTimeLimit";
+            this.CBTimeLimit.Size = new System.Drawing.Size(178, 35);
+            this.CBTimeLimit.TabIndex = 105;
+            // 
+            // TBimg
+            // 
+            this.TBimg.Location = new System.Drawing.Point(555, 3);
+            this.TBimg.Name = "TBimg";
+            this.TBimg.Size = new System.Drawing.Size(100, 22);
+            this.TBimg.TabIndex = 106;
+            this.TBimg.Visible = false;
             // 
             // ProductManagement
             // 
@@ -854,7 +809,7 @@
             this.ProdDetailTabPage.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PBProduct)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -873,7 +828,6 @@
         private System.Windows.Forms.DataGridView ProdDataGridView;
         private System.Windows.Forms.TabPage ProdDetailTabPage;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.TextBox TBImgBPath;
         private System.Windows.Forms.TextBox TBFlavor;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ComboBox CBcategory;
@@ -884,10 +838,9 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox CBMethod;
         private System.Windows.Forms.Button BtnUpdate;
-        private System.Windows.Forms.Button BTNPicUpdate;
+        private System.Windows.Forms.Button BTNAddImage;
         private System.Windows.Forms.Button BTNPicDelete;
-        private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.ComboBox CBImageSelect;
+        private System.Windows.Forms.PictureBox PBProduct;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox TBprice;
@@ -899,10 +852,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button BTNdescription;
         private System.Windows.Forms.Button BTNback;
-        private System.Windows.Forms.DateTimePicker DTPTimelimit;
-        private System.Windows.Forms.TextBox TBImgAPath;
-        private System.Windows.Forms.TextBox TBImgCPath;
-        private System.Windows.Forms.TextBox TBImgDPath;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.ComboBox CBFilterValue;
         private System.Windows.Forms.ComboBox CBFilterColumn;
@@ -921,5 +870,7 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.ComboBox CBSour;
         private System.Windows.Forms.Button BTNClearFilters;
+        private System.Windows.Forms.ComboBox CBTimeLimit;
+        private System.Windows.Forms.TextBox TBimg;
     }
 }

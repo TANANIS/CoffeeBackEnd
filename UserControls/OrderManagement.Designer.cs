@@ -34,7 +34,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.BTNOrdDetail = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -43,11 +43,11 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.OrdDataGridView = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button6 = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.OrderDetailDataGridView = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -65,10 +65,10 @@
             this.panel3.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.OrdDataGridView)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.OrderDetailDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -97,7 +97,7 @@
             this.tableLayoutPanel1.Controls.Add(this.button4, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.button3, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.button2, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.BTNOrdDetail, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.button1, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.textBox1, 1, 0);
@@ -130,7 +130,6 @@
             this.button4.TabIndex = 4;
             this.button4.Text = "已刪除";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
@@ -158,19 +157,20 @@
             this.label1.TabIndex = 8;
             this.label1.Text = "查看過往訂單：";
             // 
-            // button2
+            // BTNOrdDetail
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.BTNOrdDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.button2, 2);
-            this.button2.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(3, 359);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(312, 83);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "展開訂單詳情";
-            this.button2.UseVisualStyleBackColor = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.BTNOrdDetail, 2);
+            this.BTNOrdDetail.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.BTNOrdDetail.Location = new System.Drawing.Point(3, 359);
+            this.BTNOrdDetail.Name = "BTNOrdDetail";
+            this.BTNOrdDetail.Size = new System.Drawing.Size(312, 83);
+            this.BTNOrdDetail.TabIndex = 7;
+            this.BTNOrdDetail.Text = "展開訂單詳情";
+            this.BTNOrdDetail.UseVisualStyleBackColor = true;
+            this.BTNOrdDetail.Click += new System.EventHandler(this.BTNOrdDetail_Click);
             // 
             // label2
             // 
@@ -252,7 +252,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.dataGridView1);
+            this.tabPage1.Controls.Add(this.OrdDataGridView);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -261,15 +261,16 @@
             this.tabPage1.Text = "當前訂單";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // OrdDataGridView
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(789, 597);
-            this.dataGridView1.TabIndex = 0;
+            this.OrdDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.OrdDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.OrdDataGridView.Location = new System.Drawing.Point(3, 3);
+            this.OrdDataGridView.Name = "OrdDataGridView";
+            this.OrdDataGridView.RowTemplate.Height = 24;
+            this.OrdDataGridView.Size = new System.Drawing.Size(789, 597);
+            this.OrdDataGridView.TabIndex = 0;
+            this.OrdDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrdDataGridView_CellDoubleClick);
             // 
             // tabPage2
             // 
@@ -289,7 +290,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.46154F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.46154F));
             this.tableLayoutPanel2.Controls.Add(this.button6, 2, 10);
-            this.tableLayoutPanel2.Controls.Add(this.dataGridView2, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.OrderDetailDataGridView, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label4, 0, 6);
             this.tableLayoutPanel2.Controls.Add(this.textBox2, 1, 6);
             this.tableLayoutPanel2.Controls.Add(this.label7, 2, 0);
@@ -331,20 +332,20 @@
             this.button6.Text = "確認修改";
             this.button6.UseVisualStyleBackColor = true;
             // 
-            // dataGridView2
+            // OrderDetailDataGridView
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tableLayoutPanel2.SetColumnSpan(this.dataGridView2, 2);
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView2.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ReadOnly = true;
-            this.tableLayoutPanel2.SetRowSpan(this.dataGridView2, 6);
-            this.dataGridView2.RowTemplate.Height = 24;
-            this.dataGridView2.Size = new System.Drawing.Size(479, 318);
-            this.dataGridView2.TabIndex = 22;
+            this.OrderDetailDataGridView.AllowUserToAddRows = false;
+            this.OrderDetailDataGridView.AllowUserToDeleteRows = false;
+            this.OrderDetailDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tableLayoutPanel2.SetColumnSpan(this.OrderDetailDataGridView, 2);
+            this.OrderDetailDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.OrderDetailDataGridView.Location = new System.Drawing.Point(3, 3);
+            this.OrderDetailDataGridView.Name = "OrderDetailDataGridView";
+            this.OrderDetailDataGridView.ReadOnly = true;
+            this.tableLayoutPanel2.SetRowSpan(this.OrderDetailDataGridView, 6);
+            this.OrderDetailDataGridView.RowTemplate.Height = 24;
+            this.OrderDetailDataGridView.Size = new System.Drawing.Size(479, 318);
+            this.OrderDetailDataGridView.TabIndex = 22;
             // 
             // label4
             // 
@@ -476,11 +477,11 @@
             this.panel3.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.OrdDataGridView)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.OrderDetailDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -494,7 +495,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button BTNOrdDetail;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
@@ -502,11 +503,11 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView OrdDataGridView;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView OrderDetailDataGridView;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label7;

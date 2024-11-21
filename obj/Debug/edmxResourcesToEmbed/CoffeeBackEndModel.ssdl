@@ -44,6 +44,8 @@
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="UpdateDate" Type="datetime" />
     <Property Name="Status" Type="varchar" MaxLength="5" />
+    <Property Name="IsSuspended" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="ORDERDETAIL">
     <Key>
@@ -118,19 +120,16 @@
     <Property Name="UpdateUser" Type="nvarchar" MaxLength="12" />
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="UpdateDate" Type="datetime" />
-    <Property Name="Timelimit" Type="datetime" />
+    <Property Name="Timelimit" Type="nvarchar" MaxLength="4" />
     <Property Name="Fragrance" Type="tinyint" />
     <Property Name="Sour" Type="tinyint" />
     <Property Name="Bitter" Type="tinyint" />
     <Property Name="Sweet" Type="tinyint" />
     <Property Name="STRONG" Type="tinyint" />
     <Property Name="Method" Type="varchar" MaxLength="100" />
-    <Property Name="ImgA" Type="varchar" MaxLength="100" />
-    <Property Name="ImgB" Type="varchar" MaxLength="100" />
-    <Property Name="ImgC" Type="varchar" MaxLength="100" />
-    <Property Name="ImgD" Type="varchar" MaxLength="100" />
-    <Property Name="Weight" Type="smallint" />
-    <Property Name="Status" Type="varchar" MaxLength="5" />
+    <Property Name="Img" Type="varchar" MaxLength="100" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Weight" Type="nchar" MaxLength="4" />
   </EntityType>
   <EntityType Name="STOCKHEADER">
     <Key>
@@ -172,6 +171,7 @@
     <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
     <Property Name="UserId" Type="varchar" MaxLength="12" />
     <Property Name="Status" Type="varchar" MaxLength="5" />
+    <Property Name="d_Status" Type="varchar" MaxLength="5" />
   </EntityType>
   <!--產生期間發現錯誤:
 警告 6002: 資料表/檢視 'PROJECT.dbo.v_cartALL' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
@@ -263,7 +263,8 @@
     [v_cart_product].[CreateDate] AS [CreateDate], 
     [v_cart_product].[ProductName] AS [ProductName], 
     [v_cart_product].[UserId] AS [UserId], 
-    [v_cart_product].[Status] AS [Status]
+    [v_cart_product].[Status] AS [Status], 
+    [v_cart_product].[d_Status] AS [d_Status]
     FROM [dbo].[v_cart_product] AS [v_cart_product]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="v_cartALL" EntityType="Self.v_cartALL" store:Type="Views" store:Schema="dbo">

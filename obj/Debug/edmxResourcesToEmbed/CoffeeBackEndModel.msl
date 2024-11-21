@@ -76,6 +76,8 @@
     <EntitySetMapping Name="CUSTOMERs">
       <EntityTypeMapping TypeName="ProductionModel.CUSTOMER">
         <MappingFragment StoreEntitySet="CUSTOMER">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsSuspended" ColumnName="IsSuspended" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
@@ -115,6 +117,7 @@
     <EntitySetMapping Name="v_cart_product">
       <EntityTypeMapping TypeName="ProductionModel.v_cart_product">
         <MappingFragment StoreEntitySet="v_cart_product">
+          <ScalarProperty Name="d_Status" ColumnName="d_Status" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -212,12 +215,9 @@
     <EntitySetMapping Name="PRODUCTs">
       <EntityTypeMapping TypeName="ProductionModel.PRODUCT">
         <MappingFragment StoreEntitySet="PRODUCT">
-          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Weight" ColumnName="Weight" />
-          <ScalarProperty Name="ImgD" ColumnName="ImgD" />
-          <ScalarProperty Name="ImgC" ColumnName="ImgC" />
-          <ScalarProperty Name="ImgB" ColumnName="ImgB" />
-          <ScalarProperty Name="ImgA" ColumnName="ImgA" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Img" ColumnName="Img" />
           <ScalarProperty Name="Method" ColumnName="Method" />
           <ScalarProperty Name="STRONG" ColumnName="STRONG" />
           <ScalarProperty Name="Sweet" ColumnName="Sweet" />

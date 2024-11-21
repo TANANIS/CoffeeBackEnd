@@ -105,6 +105,8 @@
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
     <Property Name="UpdateDate" Type="DateTime" Precision="3" />
     <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="IsSuspended" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="STOCKHEADER">
     <Key>
@@ -136,6 +138,7 @@
     <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="UserId" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
     <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="d_Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="v_cartALL">
     <Key>
@@ -235,18 +238,15 @@
     <Property Name="UpdateUser" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
     <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-    <Property Name="Timelimit" Type="DateTime" Precision="3" />
+    <Property Name="Timelimit" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
     <Property Name="Fragrance" Type="Byte" />
     <Property Name="Sour" Type="Byte" />
     <Property Name="Bitter" Type="Byte" />
     <Property Name="Sweet" Type="Byte" />
     <Property Name="STRONG" Type="Byte" />
     <Property Name="Method" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="ImgA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="ImgB" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="ImgC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="ImgD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Weight" Type="Int16" />
-    <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Img" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Weight" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
   </EntityType>
 </Schema>

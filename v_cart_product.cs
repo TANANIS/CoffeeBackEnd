@@ -24,5 +24,6 @@ namespace CoffeeBackEnd20221026
         public string ProductName { get; set; }
         public string UserId { get; set; }
         public string Status { get; set; }
+        public string d_Status { get; set; }
     }
 }
